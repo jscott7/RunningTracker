@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SportTracksClient": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\Family Files\\Jonathan\\Running\\Jonathan's History~backup-180407 - Copy.logbook3.xml\" \"C:\\Family Files\\Jonathan\\IT\\GitHub\\FitDecoder\\9BBD4600.FIT\""
+    }
+  }
+}
