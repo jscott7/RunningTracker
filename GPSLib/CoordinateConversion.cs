@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GPSLib
+﻿namespace GPSLib
 {
     public class CoordinateConversion
     {
         private static readonly float Multiplier = (float)(180 / Math.Pow(2, 31));
+
         /*
         * A semicircle is a unit of location-based measurement on an arc. 
         * An arc of 180 degrees is made up of many semicircle units; 2^31 semicircles to be exact. 

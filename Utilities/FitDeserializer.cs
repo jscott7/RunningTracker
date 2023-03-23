@@ -232,15 +232,6 @@ namespace Utilities
             }
         }
 
-        /*
-           * A semicircle is a unit of location-based measurement on an arc. 
-           * An arc of 180 degrees is made up of many semicircle units; 2^31 semicircles to be exact. 
-           * A semicircle can be represented by a 32-bit number. This number can hold more information and is more accurate for GPS systems than a simple longitude and latitude value.
-           * Semicircles that correspond to North latitudes and East longitudes are indicated with positive values; 
-           * semicircles that correspond to South latitudes and West longitudes are indicated with negative values.
-           *   The following formulas show how to convert between degrees and semicircles:
-           *   degrees = semicircles * ( 180 / 2^31 )
-           */
         private void OnRecordMessage(object sender, MesgEventArgs e)
         {
             Console.WriteLine("Record Handler: Received {0} Mesg, it has global ID#{1}",
@@ -298,6 +289,7 @@ namespace Utilities
         {
             _activity.ReferenceId = Guid.NewGuid();
             _activity.CategoryId = Guid.NewGuid(); // Although this will be the "running" category
+            
             _activity.TotalDistance = (float)GetSummaryValue(summaryFields, "TotalDistance");
             _activity.TotalCalories = (ushort)GetSummaryValue(summaryFields, "TotalCalories");
             _activity.TotalTime = (float)GetSummaryValue(summaryFields, "TotalElapsedTime");
@@ -306,19 +298,13 @@ namespace Utilities
 
             var x = new Dynastream.Fit.DateTime((uint)startTime);
             _activity.StartTime = x.GetDateTime();
-            if (_activity.StartTime != null)
-            {
-                _activity.HasStartTime = true;
-            }
+            _activity.HasStartTime = true;
         }
 
         object GetSummaryValue(IEnumerable<Field> summaryFields, string fieldName)
         {
-            var field = from Field item in summaryFields
-                        where item.Name == fieldName
-                        select item;
-
-            return field.FirstOrDefault().GetValue();
+            // ! Null forgiveness operator. Result can be non-nullable
+            return summaryFields.FirstOrDefault(x => x.Name == fieldName)!.GetValue();
         }
     }
 }
