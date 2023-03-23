@@ -1,4 +1,5 @@
 ﻿using Dynastream.Fit;
+using Microsoft.VisualBasic;
 using SportTracksXmlReader;
 using System;
 using System.Collections.Generic;
@@ -256,11 +257,9 @@ namespace Utilities
             var lat = recordMessage.GetPositionLat();
             var longit = recordMessage.GetPositionLong();
             var distance = recordMessage.GetDistance();
-
-            double multiplier = (float)(180 / Math.Pow(2, 31));
-      
-            double latDegrees = lat.Value * multiplier;
-            double longDegrees = longit.Value * multiplier;
+    
+            var latDegrees = GPSLib.CoordinateConversion.SemicircleToDegrees(lat);
+            var longDegrees = GPSLib.CoordinateConversion.SemicircleToDegrees(longit);
 
             var alt = recordMessage.GetAltitude();
             var timestamp = recordMessage.GetTimestamp();
@@ -288,14 +287,13 @@ namespace Utilities
                 }                  
             }
 
-            _activity.GPSRoute.LatitudeData.Add((float)latDegrees);
-            _activity.GPSRoute.LongitudeData.Add((float)longDegrees);
+            _activity.GPSRoute.LatitudeData.Add(latDegrees);
+            _activity.GPSRoute.LongitudeData.Add(longDegrees);
             _activity.GPSRoute.TimeData.Add(timestamp.GetDateTime());
             _activity.GPSRoute.ElevationData.Add(alt.Value);
             _activity.GPSRoute.DistanceData.Add(distance.Value);
         }
 
- 
         void DecodeActivitySummary(IEnumerable<Field> summaryFields)
         {
             _activity.ReferenceId = Guid.NewGuid();
@@ -313,6 +311,7 @@ namespace Utilities
                 _activity.HasStartTime = true;
             }
         }
+
         object GetSummaryValue(IEnumerable<Field> summaryFields, string fieldName)
         {
             var field = from Field item in summaryFields
