@@ -1,11 +1,6 @@
 ﻿using Dynastream.Fit;
-using Microsoft.VisualBasic;
 using SportTracksXmlReader;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using Activity = SportTracksXmlReader.Activity;
 
 namespace Utilities
@@ -14,7 +9,7 @@ namespace Utilities
     {
         private FileStream _fitSource;
         private Activity _activity = new Activity();
-        private Dictionary<ushort, int> mesgCounts = new Dictionary<ushort, int>();
+        private Dictionary<ushort, int> _mesgCounts = new Dictionary<ushort, int>();
 
         public Activity Activity { get { return _activity; } }
         public bool DeserializeAndAddToLogbook(Logbook logbook, string fitFilePath)
@@ -115,13 +110,13 @@ namespace Utilities
                     Console.WriteLine("");
                     Console.WriteLine("Summary:");
                     int totalMesgs = 0;
-                    foreach (KeyValuePair<ushort, int> pair in mesgCounts)
+                    foreach (KeyValuePair<ushort, int> pair in _mesgCounts)
                     {
                         Console.WriteLine("MesgID {0,3} Count {1}", pair.Key, pair.Value);
                         totalMesgs += pair.Value;
                     }
 
-                    Console.WriteLine("{0} Message Types {1} Total Messages", mesgCounts.Count, totalMesgs);
+                    Console.WriteLine("{0} Message Types {1} Total Messages", _mesgCounts.Count, totalMesgs);
 
                     _activity.GPSRoute.EncodeBinaryData();
 
@@ -222,13 +217,13 @@ namespace Utilities
                 }
             }
 
-            if (mesgCounts.ContainsKey(e.mesg.Num))
+            if (_mesgCounts.ContainsKey(e.mesg.Num))
             {
-                mesgCounts[e.mesg.Num]++;
+                _mesgCounts[e.mesg.Num]++;
             }
             else
             {
-                mesgCounts.Add(e.mesg.Num, 1);
+                _mesgCounts.Add(e.mesg.Num, 1);
             }
         }
 
