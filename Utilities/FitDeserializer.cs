@@ -144,8 +144,7 @@ namespace Utilities
         }
 
         private void BuildLapData()
-        {
-       
+        {     
             var laps = new List<Lap>();
 
             var nextLapDistance = 1000;
@@ -273,8 +272,8 @@ namespace Utilities
                 }                  
             }
 
-            _activity.GPSRoute.LatitudeData.Add(latDegrees);
-            _activity.GPSRoute.LongitudeData.Add(longDegrees);
+            _activity.GPSRoute.LatitudeData.Add((float)latDegrees);
+            _activity.GPSRoute.LongitudeData.Add((float)longDegrees);
             _activity.GPSRoute.TimeData.Add(timestamp.GetDateTime());
             _activity.GPSRoute.ElevationData.Add(alt.Value);
             _activity.GPSRoute.DistanceData.Add(distance.Value);

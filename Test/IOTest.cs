@@ -2,6 +2,7 @@ using NUnit.Framework;
 using SportTracksXmlReader;
 using System;
 using System.Collections.Generic;
+using Utilities;
 
 namespace Test
 {
@@ -27,6 +28,28 @@ namespace Test
             gpsRoute.TrackData.Data = string.Empty;
             gpsRoute.EncodeBinaryData();
             Assert.That(gpsRoute.TrackData.Data, Is.EqualTo(binaryData), "Encoded data doesn't match source");
+        }
+
+        public void Deserialize_Valid_FitFile()
+        {
+            var expected = "Pending setup of data";
+            var fitDeserializer = new FitDeserializer();
+
+            var gpsRoute = new GPSRoute();
+            gpsRoute.TrackData = new TrackData { Version = 4 };
+            gpsRoute.TrackData.Data = expected;
+            gpsRoute.DecodeBinaryData();
+
+            fitDeserializer.Deserialize(@"Pending setup of data");
+            var activity = fitDeserializer.Activity;
+            var gpsData = activity.GPSRoute.TrackData.Data;
+
+            // There was a difference in the Latitude Data
+            // Caused by rounding differences. Fixed by calulating in double then converting to float at the end
+            // Call CompareArrays to investigate
+            CompareArrays(activity.GPSRoute.LatitudeData, gpsRoute.LatitudeData);
+
+            Assert.That(gpsData, Is.EqualTo(expected));
         }
 
         /// <summary>

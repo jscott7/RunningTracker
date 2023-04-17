@@ -2,7 +2,7 @@
 {
     public class CoordinateConversion
     {
-        private static readonly float Multiplier = (float)(180 / Math.Pow(2, 31));
+        private static readonly double Multiplier = (float)(180 / Math.Pow(2, 31));
 
         /*
         * A semicircle is a unit of location-based measurement on an arc. 
@@ -17,7 +17,8 @@
         {
             if (semiCircle.HasValue)
             {
-                return semiCircle.Value * Multiplier;
+                // Calculate in double (15 digit precision) and cast to float (7 digit precision) to avoid rounding losses
+                return (float)(semiCircle.Value * Multiplier);
             }
 
             return -1;
