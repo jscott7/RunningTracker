@@ -1,6 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Utilities;
 
 namespace RunningTracker.Models
 {
@@ -18,8 +20,17 @@ namespace RunningTracker.Models
 
         private string GetApiKey()
         {
-            // TODO add ApiKey management
-            return "12345";
+            try
+            {
+                var secretsAppsettingReader = new SecretsAppSettingsReader();
+                var secretValue = secretsAppsettingReader.ReadSection<SecretValues>("SecretValues");
+                return secretValue.APIKey;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Unable to load secret: {ex.Message}");
+                return "0";
+            }
         }
     }
 }

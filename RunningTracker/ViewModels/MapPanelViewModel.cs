@@ -28,10 +28,9 @@ namespace RunningTracker.ViewModels
 
         public async Task LoadBitmap(int mapIndex)
         {
-            await using (var imageStream = await _mapPanelModel.LoadMapPanel(mapIndex))
-            {
-                MapPanel = await Task.Run(() => Bitmap.DecodeToWidth(imageStream, 400));
-            }
+            // using declaration
+            await using var imageStream = await _mapPanelModel.LoadMapPanel(mapIndex);
+            MapPanel = await Task.Run(() => Bitmap.DecodeToWidth(imageStream, 400));         
         }
     }
 }
