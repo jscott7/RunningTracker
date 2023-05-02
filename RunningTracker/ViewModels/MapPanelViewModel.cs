@@ -2,7 +2,6 @@
 using ReactiveUI;
 using RunningTracker.Models;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace RunningTracker.ViewModels
 {
@@ -13,12 +12,8 @@ namespace RunningTracker.ViewModels
 
         public MapPanelViewModel(int mapIndex)
         {
-            LoadMapCommand = ReactiveCommand.Create(async () => await LoadBitmap(mapIndex));
-
             _mapPanelModel = new MapPanel();
         }
-
-        public ICommand LoadMapCommand { get; }
 
         public Bitmap? MapPanel
         {

@@ -6,7 +6,6 @@
              x:Class="RunningTracker.Views.MapPanelView">
 
 	<StackPanel>
-		<Button Command="{Binding LoadMapCommand}" Content="Load Map"/>
 		<Border ClipToBounds="True">
 			<Panel>
 				<Image Width="400" Stretch="Uniform" Source="{Binding MapPanel}"/>

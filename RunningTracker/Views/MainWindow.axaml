@@ -16,20 +16,23 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-	<Panel Margin="40">
-		<ItemsControl Items="{Binding MapPanels}">
-			<ItemsControl.ItemsPanel>
-				<ItemsPanelTemplate>
-					<WrapPanel/>
-				</ItemsPanelTemplate>
-			</ItemsControl.ItemsPanel>
+	<StackPanel>
+		<Button Command="{Binding LoadMapCommand}" Content="Load Map"/>
+		<Panel Margin="40">
+			<ItemsControl Items="{Binding MapPanels}">
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<WrapPanel/>
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
 
-			<ItemsControl.ItemTemplate>
-				<DataTemplate>
-					<local:MapPanelView Margin="0 0 0 0"/>
-				</DataTemplate>
-			</ItemsControl.ItemTemplate>			
-		</ItemsControl>
-	</Panel>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<local:MapPanelView Margin="0 0 0 0"/>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</Panel>
+	</StackPanel>
 
 </Window>
