@@ -1,4 +1,5 @@
 ﻿using Dynastream.Fit;
+using GPSLib;
 using SportTracksXmlReader;
 using System.Diagnostics;
 using Activity = SportTracksXmlReader.Activity;
@@ -12,6 +13,7 @@ namespace Utilities
         private Dictionary<ushort, int> _mesgCounts = new Dictionary<ushort, int>();
 
         public Activity Activity { get { return _activity; } }
+
         public bool DeserializeAndAddToLogbook(Logbook logbook, string fitFilePath)
         {
             bool status = false;
@@ -139,8 +141,7 @@ namespace Utilities
                 return false;
             }
 
-            return status;
-            
+            return status;         
         }
 
         private void BuildLapData()

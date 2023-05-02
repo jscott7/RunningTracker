@@ -14,8 +14,8 @@ namespace RunningTracker.ViewModels
             LoadMapCommand = ReactiveCommand.Create(async () => await LoadBitmap());
             MapPanels.Add(new MapPanelViewModel(0));
             MapPanels.Add(new MapPanelViewModel(1));
-
         }
+
         public ICommand LoadMapCommand { get; }
 
         public async Task LoadBitmap()
