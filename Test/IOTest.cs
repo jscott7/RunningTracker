@@ -30,35 +30,6 @@ namespace Test
             Assert.That(gpsRoute.TrackData.Data, Is.EqualTo(binaryData), "Encoded data doesn't match source");
         }
 
-    
-        public void Get_Top_Left_Panel()
-        {
-            // TODO Build mock data
-            var expected = "";
-            var gpsRoute = new GPSRoute();
-            gpsRoute.TrackData = new TrackData { Version = 4 };
-            gpsRoute.TrackData.Data = expected;
-            gpsRoute.DecodeBinaryData();
-
-            var topLeft = ActivityHelper.GetTopLeft(gpsRoute);
-            Assert.That(topLeft.X, Is.EqualTo(1234));
-            Assert.That(topLeft.Y, Is.EqualTo(4567));
-        }
-
-        public void Get_Bottom_Right_Panel()
-        {
-            // TODO Build mock data
-            var expected = "";
-            var gpsRoute = new GPSRoute();
-            gpsRoute.TrackData = new TrackData { Version = 4 };
-            gpsRoute.TrackData.Data = expected;
-            gpsRoute.DecodeBinaryData();
-
-            var bottomRight = ActivityHelper.GetBottomRight(gpsRoute);
-            Assert.That(bottomRight.X, Is.EqualTo(1234));
-            Assert.That(bottomRight.Y, Is.EqualTo(4567));
-        }
-
         public void Deserialize_Valid_FitFile()
         {
             var expected = "Pending setup of data";

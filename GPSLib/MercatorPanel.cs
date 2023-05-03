@@ -2,14 +2,20 @@
 
 namespace GPSLib
 {
-    public class Mercator
+    public class MercatorPanel
     {
-        public double X { get; private set; }
-        public double Y { get; private set; }
+        public int X { get; private set; }
+        public int Y { get; private set; }
 
-        public Mercator(double latitude, double longitude, int zoom)
+        public MercatorPanel(double latitude, double longitude, int zoom)
         {
             ConvertLatLongToMercator(latitude, longitude, zoom);
+        }
+
+        public MercatorPanel(int x, int y)
+        {
+            X = x;
+            Y = y;
         }
 
         private void ConvertLatLongToMercator(double latitude, double longitude, int zoom)
