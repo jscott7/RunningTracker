@@ -50,5 +50,12 @@ namespace Utilities
 
             return grid;
         }
+
+        public static MercatorPanel[,] GetMapGridPanels(GPSRoute gpsRoute)
+        {
+            var topLeft = MapPanelHelper.GetTopLeft(gpsRoute);
+            var bottomRight = MapPanelHelper.GetBottomRight(gpsRoute);
+            return MapPanelHelper.GetMapGridPanels(topLeft, bottomRight);
+        }
     }
 }

@@ -10,9 +10,9 @@ namespace RunningTracker.ViewModels
         private Bitmap? _mapPanel;
         private MapPanel _mapPanelModel;
 
-        public MapPanelViewModel(int mapIndex)
+        public MapPanelViewModel(int xPos, int yPos, int zoom = 13)
         {
-            _mapPanelModel = new MapPanel();
+            _mapPanelModel = new MapPanel(xPos, yPos, zoom);
         }
 
         public Bitmap? MapPanel
@@ -21,10 +21,10 @@ namespace RunningTracker.ViewModels
             private set => this.RaiseAndSetIfChanged(ref _mapPanel, value);
         }
 
-        public async Task LoadBitmap(int mapIndex)
+        public async Task LoadBitmap()
         {
             // using declaration
-            await using var imageStream = await _mapPanelModel.LoadMapPanel(mapIndex);
+            await using var imageStream = await _mapPanelModel.LoadMapData();
             MapPanel = await Task.Run(() => Bitmap.DecodeToWidth(imageStream, 400));         
         }
     }
