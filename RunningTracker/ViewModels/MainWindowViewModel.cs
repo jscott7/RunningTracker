@@ -28,9 +28,9 @@ namespace RunningTracker.ViewModels
             var panels = MapPanelHelper.GetMapGridPanels(gpsRoute);
 
             // TODO : I've got the ordering wrong here
-            for (int x = 0; x < panels.GetLength(0); x++)
+            for (int y = 0; y < panels.GetLength(1); y++) 
             {
-                for (int y = 0; y < panels.GetLength(1); y++)
+                for (int x = 0; x < panels.GetLength(0); x++)
                 {
                     MapPanels.Add(new MapPanelViewModel(panels[x, y].X, panels[x,y].Y));
                 }

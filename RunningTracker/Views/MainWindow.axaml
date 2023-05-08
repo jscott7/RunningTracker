@@ -18,14 +18,14 @@
 
 	<StackPanel>
 		<Button Command="{Binding LoadMapCommand}" Content="Load Map"/>
-		<ListBox Items="{Binding MapPanels}" Background="Transparent" >
-			<ListBox.ItemsPanel>
+		<ItemsControl Items="{Binding MapPanels}" Background="Transparent" BorderThickness="0" Padding="0">
+			<ItemsControl.ItemsPanel>
 				<!-- TODO Get rid of padding -->
 				<ItemsPanelTemplate>
-					<WrapPanel />
+					<WrapPanel/>
 				</ItemsPanelTemplate>
-			</ListBox.ItemsPanel>
-		</ListBox>
+			</ItemsControl.ItemsPanel>
+		</ItemsControl>
 	</StackPanel>
 
 </Window>
