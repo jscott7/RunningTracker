@@ -1,12 +1,9 @@
 using ReactiveUI;
-using RunningTracker.Models;
 using SportTracksXmlReader;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Utilities;
 
 namespace RunningTracker.ViewModels
 {
@@ -25,9 +22,12 @@ namespace RunningTracker.ViewModels
             gpsRoute.TrackData.Data = rawData;
             gpsRoute.DecodeBinaryData();
 
-            var panels = MapPanelHelper.GetMapGridPanels(gpsRoute);
+            var testLatitude = gpsRoute.LatitudeData[0];
+            var testLongitude = gpsRoute.LongitudeData[0];
 
-            // TODO : I've got the ordering wrong here
+            MapPanels.Add(new StaticPanelViewModel(testLatitude, testLongitude));
+/*
+            var panels = MapPanelHelper.GetMapGridPanels(gpsRoute);
             for (int y = 0; y < panels.GetLength(1); y++) 
             {
                 for (int x = 0; x < panels.GetLength(0); x++)
@@ -35,6 +35,7 @@ namespace RunningTracker.ViewModels
                     MapPanels.Add(new MapPanelViewModel(panels[x, y].X, panels[x,y].Y));
                 }
             }
+*/
         }
 
         public ICommand LoadMapCommand { get; }
@@ -50,6 +51,6 @@ namespace RunningTracker.ViewModels
             await Task.WhenAll(bitmapLoad);
         }
 
-        public ObservableCollection<MapPanelViewModel> MapPanels { get; } = new();
+        public ObservableCollection<StaticPanelViewModel> MapPanels { get; } = new();
     }
 }

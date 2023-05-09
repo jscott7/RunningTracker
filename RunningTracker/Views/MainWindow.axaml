@@ -20,9 +20,8 @@
 		<Button Command="{Binding LoadMapCommand}" Content="Load Map"/>
 		<ItemsControl Items="{Binding MapPanels}" Background="Transparent" BorderThickness="0" Padding="0">
 			<ItemsControl.ItemsPanel>
-				<!-- TODO Get rid of padding -->
 				<ItemsPanelTemplate>
-					<WrapPanel/>
+					<WrapPanel ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
 				</ItemsPanelTemplate>
 			</ItemsControl.ItemsPanel>
 		</ItemsControl>
