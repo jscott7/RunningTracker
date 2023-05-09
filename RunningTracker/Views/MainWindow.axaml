@@ -16,15 +16,15 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-	<StackPanel>
-		<Button Command="{Binding LoadMapCommand}" Content="Load Map"/>
-		<ItemsControl Items="{Binding MapPanels}" Background="Transparent" BorderThickness="0" Padding="0">
-			<ItemsControl.ItemsPanel>
-				<ItemsPanelTemplate>
-					<WrapPanel ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
-				</ItemsPanelTemplate>
-			</ItemsControl.ItemsPanel>
-		</ItemsControl>
-	</StackPanel>
+	<DockPanel>
+		<Button Command="{Binding LoadMapCommand}" Content="Load Map" DockPanel.Dock="Top"/>
 
+		<ListBox Items="{Binding MapPanels}" Background="Transparent" Padding="0" Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<WrapPanel />
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+		</ListBox> 
+	</DockPanel>
 </Window>
