@@ -1,7 +1,10 @@
 ﻿using Avalonia.Media.Imaging;
 using ReactiveUI;
 using RunningTracker.Models;
+using System.Drawing.Imaging;
+//using System.Drawing;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace RunningTracker.ViewModels
 {
@@ -24,7 +27,26 @@ namespace RunningTracker.ViewModels
         public async Task LoadBitmap()
         {
             await using var imageStream = await _mapPanelModel.LoadMapData();
-            StaticMapPanel = await Task.Run(() => Bitmap.DecodeToWidth(imageStream, 800));         
+
+            //  StaticMapPanel = await Task.Run(() => Bitmap.DecodeToWidth(imageStream, 800));
+            StaticMapPanel = await Task.Run(() => AvaloniaBitmapFromSystemDrawingBitmap(imageStream)); ;
         }
+
+        private Bitmap AvaloniaBitmapFromSystemDrawingBitmap(Stream imageStream)
+        {
+            using var bitmapTmp = new System.Drawing.Bitmap(imageStream);
+
+            var bitmapdata = bitmapTmp.LockBits(new System.Drawing.Rectangle(0, 0, bitmapTmp.Width, bitmapTmp.Height), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+            var avaloniaBitmap = new Bitmap(Avalonia.Platform.PixelFormat.Bgra8888, Avalonia.Platform.AlphaFormat.Premul,
+                bitmapdata.Scan0,
+                new Avalonia.PixelSize(bitmapdata.Width, bitmapdata.Height),
+                new Avalonia.Vector(96, 96),
+                bitmapdata.Stride);
+
+            bitmapTmp.UnlockBits(bitmapdata);
+            
+            return avaloniaBitmap;
+        }
+ 
     }
 }
