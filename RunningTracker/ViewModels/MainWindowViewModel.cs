@@ -22,20 +22,7 @@ namespace RunningTracker.ViewModels
             gpsRoute.TrackData.Data = rawData;
             gpsRoute.DecodeBinaryData();
 
-            var testLatitude = gpsRoute.LatitudeData[0];
-            var testLongitude = gpsRoute.LongitudeData[0];
-
-            MapPanels.Add(new StaticPanelViewModel(testLatitude, testLongitude));
-/*
-            var panels = MapPanelHelper.GetMapGridPanels(gpsRoute);
-            for (int y = 0; y < panels.GetLength(1); y++) 
-            {
-                for (int x = 0; x < panels.GetLength(0); x++)
-                {
-                    MapPanels.Add(new MapPanelViewModel(panels[x, y].X, panels[x,y].Y));
-                }
-            }
-*/
+            MapPanels.Add(new StaticPanelViewModel(gpsRoute));
         }
 
         public ICommand LoadMapCommand { get; }

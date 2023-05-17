@@ -8,7 +8,7 @@
         x:Class="RunningTracker.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="RunningTracker"
-		TransparencyLevelHint="AcrylicBlur"
+		TransparencyLevelHint="Mica"
 		Background="Transparent"
 		ExtendClientAreaToDecorationsHint="True">
 
