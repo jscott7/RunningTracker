@@ -70,10 +70,11 @@ namespace RunningTracker.ViewModels
             var graphics = System.Drawing.Graphics.FromImage(editableBitmap);
             var pen = new System.Drawing.Pen(System.Drawing.Color.Blue, 10);
 
+            // Magic numbers unfortunately 
+            // 1000 is from the number of pixels requested
             double scale = 2650.0 / 1000.0 ;
-
-            var totalLong = 0.022 * scale;
-            var totalLat = 0.022 * scale;
+            var totalLong = 0.015 * scale; 
+            var totalLat = 0.009 * scale;
 
             var centerLat = _gpsRoute.LatitudeData[0]; 
             var centerLon = _gpsRoute.LongitudeData[0]; 
@@ -108,7 +109,6 @@ namespace RunningTracker.ViewModels
                 lastLon = longitude;
             }
 
-     //       graphics.DrawEllipse(pen, new System.Drawing.Rectangle(width/2, height/2, 500, 500));
             return editableBitmap;
         }
     }

@@ -32,7 +32,6 @@ namespace Utilities
                 throw new NullReferenceException("Unable to obtain values for Latitude or Longitude");
             }
         }
-
         public static MercatorPanel[,] GetMapGridPanels(MercatorPanel topLeft, MercatorPanel bottomRight)
         {
             var xDiff = bottomRight.X - topLeft.X;
@@ -56,6 +55,12 @@ namespace Utilities
             var topLeft = MapPanelHelper.GetTopLeft(gpsRoute);
             var bottomRight = MapPanelHelper.GetBottomRight(gpsRoute);
             return MapPanelHelper.GetMapGridPanels(topLeft, bottomRight);
+        }
+
+        // TODO Implement this
+        public static (float, float) GetCenterLatLong(GPSRoute gpsRoute)
+        {
+            return (0, 0);
         }
     }
 }
