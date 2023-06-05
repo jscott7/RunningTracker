@@ -9,29 +9,17 @@ namespace Utilities
         {
             var latitudeMinMax = Utils.GetMinMax(gpsRoute.LatitudeData);
             var longitudeMinMax = Utils.GetMinMax(gpsRoute.LongitudeData);
-            if (latitudeMinMax.Max.HasValue && longitudeMinMax.Min.HasValue)
-            {
-                return new MercatorPanel(latitudeMinMax.Max.Value, longitudeMinMax.Min.Value, 13);
-            }
-            else
-            {
-                throw new NullReferenceException("Unable to obtain values for Latitude or Longitude");
-            }
+            return new MercatorPanel(latitudeMinMax.Max, longitudeMinMax.Min, 13);
         }
 
         public static MercatorPanel GetBottomRight(GPSRoute gpsRoute)
         {
             var latitudeMinMax = Utils.GetMinMax(gpsRoute.LatitudeData);
             var longitudeMinMax = Utils.GetMinMax(gpsRoute.LongitudeData);
-            if (latitudeMinMax.Min.HasValue && longitudeMinMax.Max.HasValue)
-            {
-                return new MercatorPanel(latitudeMinMax.Min.Value, longitudeMinMax.Max.Value, 13);
-            }
-            else
-            {
-                throw new NullReferenceException("Unable to obtain values for Latitude or Longitude");
-            }
+
+            return new MercatorPanel(latitudeMinMax.Min, longitudeMinMax.Max, 13);
         }
+
         public static MercatorPanel[,] GetMapGridPanels(MercatorPanel topLeft, MercatorPanel bottomRight)
         {
             var xDiff = bottomRight.X - topLeft.X;
@@ -57,10 +45,12 @@ namespace Utilities
             return MapPanelHelper.GetMapGridPanels(topLeft, bottomRight);
         }
 
-        // TODO Implement this
-        public static (float, float) GetCenterLatLong(GPSRoute gpsRoute)
+        public static (float latMid, float longMid) GetMidLatLong(GPSRoute gpsRoute)
         {
-            return (0, 0);
+            var latitudeMid = Utils.GetMid(gpsRoute.LatitudeData);
+            var longitudeMid = Utils.GetMid(gpsRoute.LongitudeData);
+  
+            return (latitudeMid, longitudeMid);
         }
     }
 }

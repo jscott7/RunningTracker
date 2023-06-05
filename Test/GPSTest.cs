@@ -41,13 +41,24 @@ namespace Test
         }
 
         [Test]
-        public static void MinMax_From_EmptyList()
+        public static void MinMax_Throws_From_EmptyList()
         {
             var lat = new List<float> ();
-            var minMax = Utils.GetMinMax(lat);
+          
+            var exception = Assert.Throws<GpsException>(() => Utils.GetMinMax(lat));
+            Assert.That(exception.Message, Is.EqualTo("Unable to determine max or minimum values from input data list"));
+        }
 
-            Assert.That(minMax.Min.HasValue, Is.False);
-            Assert.That(minMax.Max.HasValue, Is.False);
+        [Test]
+        public static void Mid_From_List()
+        {
+            var lat = new List<float> { 20.0f, 15.1f, 2.5f, 4.7f, 0.0f };
+            var mid = Utils.GetMid(lat);
+            Assert.That(mid, Is.EqualTo(10));
+
+            var longitude = new List<float> { -1.4f, -10.0f, 20.0f };
+            var mid2 = Utils.GetMid(longitude);
+            Assert.That(mid2, Is.EqualTo(5));
         }
     }
 }
