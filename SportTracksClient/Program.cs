@@ -1,6 +1,5 @@
 ﻿using SportTracksXmlReader;
 using System;
-using System.Xml;
 using System.Xml.Serialization;
 using Utilities;
 
@@ -17,7 +16,7 @@ namespace SportTracksClient
             }
 
             var logbookFile = args[0];
-            var logbook = LoadLogbook(logbookFile);
+            var logbook = Persistence.LoadLogbook(logbookFile);
 
             // Optional load fit file and add to logbook
             if (args.Length > 1)
@@ -45,26 +44,6 @@ namespace SportTracksClient
             Console.WriteLine("Finished");
         }
 
-        static Logbook LoadLogbook(string logbookPath)
-        {         
-            var xmlDocument = new XmlDocument();
-            xmlDocument.Load(logbookPath);
 
-            var documentElement = xmlDocument.DocumentElement;
-            var nsmgr = new XmlNamespaceManager(xmlDocument.NameTable);
-            nsmgr.AddNamespace("ns", "urn:uuid:D0EB2ED5-49B6-44e3-B13C-CF15BE7DD7DD");
-
-            var xmlSerializer = new XmlSerializer(typeof(Logbook));
-
-            try
-            {
-                return(Logbook)xmlSerializer.Deserialize(new XmlNodeReader((XmlNode)documentElement));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                return null;
-            }
-        }
     }
 }
