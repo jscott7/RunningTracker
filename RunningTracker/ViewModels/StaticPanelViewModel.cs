@@ -65,43 +65,36 @@ namespace RunningTracker.ViewModels
         {
             var editableBitmap = new System.Drawing.Bitmap(bitmap);
             
-            var width = editableBitmap.Width;
-            var height = editableBitmap.Height;
-
             var graphics = System.Drawing.Graphics.FromImage(editableBitmap);
             var pen = new System.Drawing.Pen(System.Drawing.Color.Blue, 10);
            
-            var midPoint = MapPanelHelper.GetMidLatLong(_gpsRoute);
+            var gpsRouteInfo = MapPanelHelper.GetMidLatLong(_gpsRoute);
          
-            var parallelMultiplier = Math.Cos(midPoint.latMid * Math.PI / 180);
+            var parallelMultiplier = Math.Cos(gpsRouteInfo.latMid * Math.PI / 180);
             var degreesPerPixelX = 360 / Math.Pow(2, 14 + 8);
             var degreesPerPixelY = 360 / Math.Pow(2, 14 + 8) * parallelMultiplier;
 
-            var center = new System.Drawing.Point(width/2, height/2);
-
-            var lastPt = center;
-            var lastLat = midPoint.latMid;
-            var lastLon = midPoint.longMid;
+            var centerPt = new System.Drawing.Point(editableBitmap.Width / 2, editableBitmap.Height / 2);
+            var centerLat = gpsRouteInfo.latMid;
+            var centerLon = gpsRouteInfo.longMid;
+            var lastPt = centerPt;
 
             for (var routeIndex = 0; routeIndex < _gpsRoute.LatitudeData.Count; routeIndex++)
             {
-                var lat = _gpsRoute.LatitudeData[routeIndex];
+                var latitude = _gpsRoute.LatitudeData[routeIndex];
                 var longitude = _gpsRoute.LongitudeData[routeIndex];
 
-                var latDiff = (lastLat - lat) / degreesPerPixelY * 2;
-                var lonDiff = (longitude - lastLon) / degreesPerPixelX * 2;
- 
-                if ((int)latDiff == 0 || (int)lonDiff == 0) continue;
+                var latPixel = (centerLat - latitude) / degreesPerPixelY * 2; // *2 because we called the scaling modifer in the API Call
+                var lonPixel = (longitude - centerLon) / degreesPerPixelX * 2;
 
-                var pt = new System.Drawing.Point(lastPt.X + (int)lonDiff, lastPt.Y + (int)latDiff);
-                if (routeIndex > 0)
+                var pt = new System.Drawing.Point(centerPt.X + (int)lonPixel, centerPt.Y + (int)latPixel);
+            
+                if (routeIndex > 0) // Don't draw first line from center
                 {
                     graphics.DrawLine(pen, lastPt, pt);
                 }
 
                 lastPt = pt;
-                lastLat = lat;
-                lastLon = longitude;
             }
 
             return editableBitmap;
