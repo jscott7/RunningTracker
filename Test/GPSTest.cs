@@ -15,7 +15,7 @@ namespace Test
         }
 
         [Test]
-        public static void MinMax_From_LatLongList()
+        public void MinMax_From_LatLongList()
         {
             var lat = new List<float> { 52.1f, 55.1f, 58.1f };
             var minMax = Utils.GetMinMax(lat);
@@ -25,7 +25,7 @@ namespace Test
         }
 
         [Test]
-        public static void MinMax_From_LatLongList_WithDuplicate()
+        public void MinMax_From_LatLongList_WithDuplicate()
         {
             var lat = new List<float> { 52.1f, 52.1f, 55.1f, 58.1f };
             var minMax = Utils.GetMinMax(lat);
@@ -41,7 +41,7 @@ namespace Test
         }
 
         [Test]
-        public static void MinMax_Throws_From_EmptyList()
+        public void MinMax_Throws_From_EmptyList()
         {
             var lat = new List<float> ();
           
