@@ -3,6 +3,7 @@ using SportTracksXmlReader;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
@@ -37,21 +38,18 @@ namespace Test
         /// <summary>
         /// This is used to split a corrupt logbook into individual activity files and attempt to
         /// deserialize. The problematic file can then be identified.
-        /// </summary>
+        /// </summary>     
         public void Split_Activities_And_Deserialize()
         {
-            var xmlDoc = new XmlDocument();
-            xmlDoc.Load(@"C:\temp\Running.logbook3");
-            var nsmgr = new XmlNamespaceManager(xmlDoc.NameTable);
-            nsmgr.AddNamespace("ns", "urn:uuid:D0EB2ED5-49B6-44e3-B13C-CF15BE7DD7DD");
-            var documentElement = xmlDoc.DocumentElement;
+           XNamespace ns = "urn:uuid:D0EB2ED5-49B6-44e3-B13C-CF15BE7DD7DD";
+            var elements = XDocument.Load(@"C:\temp\cutdownlogbook.logbook3");
+            var linqToXmlActivity = elements.Descendants(ns + "Activity").Where(e => (string)e.Attribute("hasStartTime") == "true");
 
-            var activities = documentElement.SelectNodes("//ns:Logbook/ns:Activities/ns:Activity", nsmgr);
             int index = 1;
-            foreach(XmlNode activity in activities)
+            foreach (var activity in linqToXmlActivity)
             {
-                var file = Path.Combine(@"C:\temp\activities", $"{index++}.xml");          
-                File.WriteAllText(file, activity.OuterXml);
+                var file = Path.Combine(@"C:\temp\activities", $"{index++}.xml");
+                activity.Save(file);
             }
         
             XmlSerializer xmlSerializer = new(typeof(Activity));
