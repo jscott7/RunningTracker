@@ -13,7 +13,7 @@ namespace RunningTracker.ViewModels
         {
             LoadMapCommand = ReactiveCommand.Create(async () => await LoadBitmap());
 
-            var logbook = Persistence.LoadLogbook(@"C:\temp\cutdownlogbook.logbook3");
+            var logbook = Persistence.LoadLogbook(@"C:\temp\Jonathan's History.logbook3");
             var gpsRoute = logbook.Activities[logbook.Activities.Length - 1].GPSRoute;
             gpsRoute.DecodeBinaryData();
             MapPanels.Add(new StaticPanelViewModel(gpsRoute));

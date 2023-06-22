@@ -2,6 +2,10 @@ using NUnit.Framework;
 using SportTracksXmlReader;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 using Utilities;
 
 namespace Test
@@ -28,6 +32,46 @@ namespace Test
             gpsRoute.TrackData.Data = string.Empty;
             gpsRoute.EncodeBinaryData();
             Assert.That(gpsRoute.TrackData.Data, Is.EqualTo(binaryData), "Encoded data doesn't match source");
+        }
+
+        /// <summary>
+        /// This is used to split a corrupt logbook into individual activity files and attempt to
+        /// deserialize. The problematic file can then be identified.
+        /// </summary>
+        public void Split_Activities_And_Deserialize()
+        {
+            var xmlDoc = new XmlDocument();
+            xmlDoc.Load(@"C:\temp\Running.logbook3");
+            var nsmgr = new XmlNamespaceManager(xmlDoc.NameTable);
+            nsmgr.AddNamespace("ns", "urn:uuid:D0EB2ED5-49B6-44e3-B13C-CF15BE7DD7DD");
+            var documentElement = xmlDoc.DocumentElement;
+
+            var activities = documentElement.SelectNodes("//ns:Logbook/ns:Activities/ns:Activity", nsmgr);
+            int index = 1;
+            foreach(XmlNode activity in activities)
+            {
+                var file = Path.Combine(@"C:\temp\activities", $"{index++}.xml");          
+                File.WriteAllText(file, activity.OuterXml);
+            }
+        
+            XmlSerializer xmlSerializer = new(typeof(Activity));
+
+            for (int loadIndex = 1; loadIndex < index; loadIndex++)
+            {
+                var loadDoc = new XmlDocument();
+                var file = Path.Combine(@"C:\temp\activities", $"{loadIndex}.xml");
+                loadDoc.Load(file);
+
+                var loadElement = loadDoc.DocumentElement;
+                try
+                {
+                    var activity = xmlSerializer.Deserialize(new XmlNodeReader(loadElement)) as Activity;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Failed to load {loadIndex}.xml : {ex}");
+                }
+            }
         }
 
         public void Deserialize_Valid_FitFile()
