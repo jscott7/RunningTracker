@@ -20,16 +20,19 @@ namespace RunningTracker.ViewModels
             LoadMapCommand = ReactiveCommand.Create(async () => await LoadBitmap());
 
             _logbook = Persistence.LoadLogbook(@"C:\temp\Jonathan's History.logbook3");
-            foreach (var activity in _logbook.Activities)
+            foreach (var activity in _logbook.Activities.Skip(_logbook.Activities.Length - 10))
             {
                 ActivityDates.Add(activity.StartTime.ToString("yyyy-MM-dd HH:mm:ss"));
             }
+
+            ActivityDates = new ObservableCollection<string>(ActivityDates.OrderByDescending(i => i));          
         }
 
         public ICommand LoadMapCommand { get; }
 
         public async Task LoadBitmap()
         {
+            MapPanels.Clear();
             if (_selectedActivityDate is string selectedActivityDate)
             {
                 var selectedActivity = _logbook.Activities.First(a => a.StartTime == DateTime.Parse(selectedActivityDate));
