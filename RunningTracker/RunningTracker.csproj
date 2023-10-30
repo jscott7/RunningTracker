@@ -29,4 +29,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Icons.axaml" />
+  </ItemGroup>
 </Project>

@@ -1,3 +1,4 @@
+using Microsoft.VisualBasic;
 using ReactiveUI;
 using SportTracksXmlReader;
 using System;
@@ -18,6 +19,7 @@ namespace RunningTracker.ViewModels
         public MainWindowViewModel()
         {
             LoadMapCommand = ReactiveCommand.Create(async () => await LoadBitmap());
+            SettingsCommand = ReactiveCommand.Create(async () => await OpenSettings());
 
             _logbook = Persistence.LoadLogbook(@"C:\temp\Jonathan's History.logbook3");
             foreach (var activity in _logbook.Activities.Skip(_logbook.Activities.Length - 10))
@@ -29,6 +31,10 @@ namespace RunningTracker.ViewModels
         }
 
         public ICommand LoadMapCommand { get; }
+
+        public ICommand SettingsCommand { get; }
+
+        public async Task OpenSettings() { }
 
         public async Task LoadBitmap()
         {
