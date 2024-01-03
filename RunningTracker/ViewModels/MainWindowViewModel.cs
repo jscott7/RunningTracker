@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Utilities;
@@ -16,12 +17,16 @@ namespace RunningTracker.ViewModels
         private string? _selectedActivityDate;
         private readonly Logbook _logbook;
 
+        private readonly string LogbookPath = @"History.logbook3";
+
         public MainWindowViewModel()
         {
+            ShowDialog = new Interaction<SettingsWindowViewModel, bool?>();
+
             LoadMapCommand = ReactiveCommand.Create(async () => await LoadBitmap());
             SettingsCommand = ReactiveCommand.Create(async () => await OpenSettings());
 
-            _logbook = Persistence.LoadLogbook(@"C:\temp\Jonathan's History.logbook3");
+            _logbook = Persistence.LoadLogbook(LogbookPath);
             foreach (var activity in _logbook.Activities.Skip(_logbook.Activities.Length - 10))
             {
                 ActivityDates.Add(activity.StartTime.ToString("yyyy-MM-dd HH:mm:ss"));
@@ -33,8 +38,14 @@ namespace RunningTracker.ViewModels
         public ICommand LoadMapCommand { get; }
 
         public ICommand SettingsCommand { get; }
+      
+        public Interaction<SettingsWindowViewModel, bool?> ShowDialog { get; }
 
-        public async Task OpenSettings() { }
+        public async Task OpenSettings()
+        {
+            var settings = new SettingsWindowViewModel();
+            var result = await ShowDialog.Handle(settings);
+        }
 
         public async Task LoadBitmap()
         {

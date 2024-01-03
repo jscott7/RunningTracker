@@ -32,4 +32,7 @@
   <ItemGroup>
     <UpToDateCheckInput Remove="Icons.axaml" />
   </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\SettingsWindow.axaml" />
+  </ItemGroup>
 </Project>
