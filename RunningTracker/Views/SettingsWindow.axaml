@@ -1,9 +1,26 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:vm="using:RunningTracker.ViewModels"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="150"
         x:Class="RunningTracker.Views.SettingsWindow"
-        Title="SettingsWindow">
-  Welcome to Avalonia!
+        Title="SettingsWindow"
+		TransparencyLevelHint="AcrylicBlur"
+		Background="Transparent"
+		ExtendClientAreaToDecorationsHint="True">
+	
+	<Design.DataContext>
+		<vm:SettingsWindowViewModel/>
+	</Design.DataContext>
+
+	<StackPanel Margin="10">
+		<TextBlock Margin="0 5" >APIKey:</TextBlock>
+		<TextBox  Watermark="Thunderforest APIKey"/>
+		<StackPanel Orientation="Horizontal">
+			<Button>OK</Button>
+			<Button>Cancel</Button>
+		</StackPanel>
+
+	</StackPanel>
 </Window>
