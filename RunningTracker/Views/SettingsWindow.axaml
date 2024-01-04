@@ -3,12 +3,14 @@
         xmlns:vm="using:RunningTracker.ViewModels"
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="150"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="150"
         x:Class="RunningTracker.Views.SettingsWindow"
         Title="SettingsWindow"
 		TransparencyLevelHint="AcrylicBlur"
 		Background="Transparent"
-		ExtendClientAreaToDecorationsHint="True">
+		ExtendClientAreaToDecorationsHint="True"
+		Width="400" Height="150"
+	    WindowStartupLocation="CenterOwner">
 	
 	<Design.DataContext>
 		<vm:SettingsWindowViewModel/>
