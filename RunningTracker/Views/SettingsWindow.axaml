@@ -18,10 +18,10 @@
 
 	<StackPanel Margin="10">
 		<TextBlock Margin="0 5" >APIKey:</TextBlock>
-		<TextBox  Watermark="Thunderforest APIKey"/>
+		<TextBox Watermark="Thunderforest APIKey"/>
 		<StackPanel Orientation="Horizontal">
-			<Button>OK</Button>
-			<Button>Cancel</Button>
+			<Button Command="{Binding OkCommand}" Content="OK"/>
+			<Button Command="{Binding CancelCommand}" Content="Cancel"/>
 		</StackPanel>
 
 	</StackPanel>

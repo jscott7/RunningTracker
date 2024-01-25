@@ -21,7 +21,7 @@ namespace RunningTracker.ViewModels
 
         public MainWindowViewModel()
         {
-            ShowDialog = new Interaction<SettingsWindowViewModel, bool?>();
+            ShowDialog = new Interaction<SettingsWindowViewModel, Models.SettingsData?>();
 
             LoadMapCommand = ReactiveCommand.Create(async () => await LoadBitmap());
             SettingsCommand = ReactiveCommand.Create(async () => await OpenSettings());
@@ -39,12 +39,17 @@ namespace RunningTracker.ViewModels
 
         public ICommand SettingsCommand { get; }
       
-        public Interaction<SettingsWindowViewModel, bool?> ShowDialog { get; }
+        public Interaction<SettingsWindowViewModel, Models.SettingsData?> ShowDialog { get; }
 
         public async Task OpenSettings()
         {
             var settings = new SettingsWindowViewModel();
-            var result = await ShowDialog.Handle(settings);
+            var result = await ShowDialog.Handle(settings);     
+            
+            if (result != null)
+            {
+                string x = "y";
+            }
         }
 
         public async Task LoadBitmap()

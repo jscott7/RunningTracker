@@ -1,5 +1,6 @@
 using Avalonia.ReactiveUI;
 using ReactiveUI;
+using RunningTracker.Models;
 using RunningTracker.ViewModels;
 using System.Threading.Tasks;
 
@@ -13,12 +14,13 @@ namespace RunningTracker.Views
             this.WhenActivated(d => d(ViewModel!.ShowDialog.RegisterHandler(DoShowDialogAsync)));
         }
 
-        private async Task DoShowDialogAsync(InteractionContext<SettingsWindowViewModel, bool?> interaction)
+        private async Task DoShowDialogAsync(InteractionContext<SettingsWindowViewModel, SettingsData?> interaction)
         {
+            // To use SettingsWindow as a dialog it needs to inherit ReactiveWindow<SettingsWindowViewModel>
             var dialog = new SettingsWindow();
             dialog.DataContext = interaction.Input;
-
-            var result = await dialog.ShowDialog<bool?>(this);
+            
+            var result = await dialog.ShowDialog<SettingsData?>(this);
             interaction.SetOutput(result);
         }
     }
