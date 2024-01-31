@@ -45,11 +45,6 @@ namespace RunningTracker.ViewModels
         {
             var settings = new SettingsWindowViewModel();
             var result = await ShowDialog.Handle(settings);     
-            
-            if (result != null)
-            {
-                string x = "y";
-            }
         }
 
         public async Task LoadBitmap()
