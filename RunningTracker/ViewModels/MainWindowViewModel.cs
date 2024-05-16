@@ -1,4 +1,3 @@
-using Microsoft.VisualBasic;
 using ReactiveUI;
 using SportTracksXmlReader;
 using System;

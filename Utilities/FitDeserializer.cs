@@ -1,5 +1,4 @@
 ﻿using Dynastream.Fit;
-using GPSLib;
 using SportTracksXmlReader;
 using System.Diagnostics;
 using Activity = SportTracksXmlReader.Activity;
