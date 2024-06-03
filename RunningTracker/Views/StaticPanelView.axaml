@@ -5,6 +5,8 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="RunningTracker.Views.StaticPanelView">
 	<Panel>
-		<Image Width="800" Stretch="Uniform" Source="{Binding StaticMapPanel}"/>
+		<ScrollViewer Padding="0" Margin="0" Width="600" Height="600" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
+			<Image Width="800" Stretch="Uniform" Source="{Binding StaticMapPanel}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+		</ScrollViewer>
 	</Panel>
 </UserControl>

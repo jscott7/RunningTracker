@@ -17,19 +17,15 @@ namespace Utilities
             nsmgr.AddNamespace("ns", "urn:uuid:D0EB2ED5-49B6-44e3-B13C-CF15BE7DD7DD");
 
             XmlSerializer xmlSerializer = new (typeof(Logbook));
-
-            Logbook output = null;
+ 
             try
             {
-                output = xmlSerializer.Deserialize(new XmlNodeReader(documentElement)) as Logbook;
+                return xmlSerializer.Deserialize(new XmlNodeReader(documentElement)) as Logbook;
             }
-            catch(Exception ex)
+            catch
             {
-                //TODO: Handle this exception
-                string x = "y";
+                return null;
             }
-
-            return output;
         }
     }
 }

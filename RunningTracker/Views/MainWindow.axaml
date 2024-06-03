@@ -35,12 +35,18 @@
 			</ListBox>
 			<DockPanel Grid.Row="1" Grid.Column="1">
 				<Button Command="{Binding LoadMapCommand}" Content="Load Map" DockPanel.Dock="Top"/>
-				<ListBox Items="{Binding MapPanels}" Background="Transparent" Padding="0" Margin="0" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+				<ListBox Items="{Binding MapPanels}" Background="Transparent" Padding="0" Margin="0">
 					<ListBox.ItemsPanel>
 						<ItemsPanelTemplate>
-							<WrapPanel />
+							<WrapPanel/>
 						</ItemsPanelTemplate>
 					</ListBox.ItemsPanel>
+					<ListBox.Styles>
+						<Style Selector="ListBoxItem">
+							<Setter Property="Padding" Value="0"/>
+							<Setter Property="Margin" Value="0"/>
+						</Style>
+					</ListBox.Styles>
 				</ListBox>
 			</DockPanel>
 		</Grid>
