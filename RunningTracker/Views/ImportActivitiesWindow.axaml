@@ -1,27 +1,26 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:RunningTracker.ViewModels"
-		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="150"
-        x:Class="RunningTracker.Views.SettingsWindow"
-        Title="SettingsWindow"
+        xmlns:vm="using:RunningTracker.ViewModels"
+		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="RunningTracker.Views.ImportActivitiesWindow"
+        Title="ImportActivitiesWindow"
 		TransparencyLevelHint="AcrylicBlur"
 		Background="Transparent"
 		ExtendClientAreaToDecorationsHint="True"
 		Width="400" Height="150"
 	    WindowStartupLocation="CenterOwner">
-	
-	<Design.DataContext>
-		<vm:SettingsWindowViewModel/>
-	</Design.DataContext>
 
+	<Design.DataContext>
+		<vm:ImportActivitiesWindowViewModel/>
+	</Design.DataContext>
 	<StackPanel Margin="10">
-		<TextBlock Margin="0 5" >APIKey:</TextBlock>
-		<TextBox Watermark="Thunderforest APIKey"/>
+		<TextBlock Margin="0 5" >Load Activites</TextBlock>
+		<TextBox Watermark=""/>
 		<StackPanel Orientation="Horizontal">
 			<Button Command="{Binding OkCommand}" Content="OK"/>
 			<Button Command="{Binding CancelCommand}" Content="Cancel"/>
 		</StackPanel>
-	</StackPanel>
+	</StackPanel>	
 </Window>
