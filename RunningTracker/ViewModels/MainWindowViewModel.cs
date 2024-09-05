@@ -21,9 +21,11 @@ namespace RunningTracker.ViewModels
         public MainWindowViewModel()
         {
             ShowDialog = new Interaction<SettingsWindowViewModel, Models.SettingsData?>();
+            ShowImportActivitiesDialog = new Interaction<ImportActivitiesWindowViewModel, Models.ImportedActivitesData?>();
 
             LoadMapCommand = ReactiveCommand.Create(async () => await LoadBitmap());
             SettingsCommand = ReactiveCommand.Create(async () => await OpenSettings());
+            ImportActivitiesCommand = ReactiveCommand.Create(async () => await OpenImportActivities());
 
             _logbook = Persistence.LoadLogbook(LogbookPath);
             foreach (var activity in _logbook.Activities.Skip(_logbook.Activities.Length - 10))
@@ -37,13 +39,23 @@ namespace RunningTracker.ViewModels
         public ICommand LoadMapCommand { get; }
 
         public ICommand SettingsCommand { get; }
+
+        public ICommand ImportActivitiesCommand { get; }
       
         public Interaction<SettingsWindowViewModel, Models.SettingsData?> ShowDialog { get; }
 
+        public Interaction<ImportActivitiesWindowViewModel, Models.ImportedActivitesData?> ShowImportActivitiesDialog { get; }
+  
         public async Task OpenSettings()
         {
             var settings = new SettingsWindowViewModel();
             var result = await ShowDialog.Handle(settings);     
+        }
+
+        public async Task OpenImportActivities()
+        {
+            var importActivitesViewModel = new ImportActivitiesWindowViewModel();
+            var result = await ShowImportActivitiesDialog.Handle(importActivitesViewModel);
         }
 
         public async Task LoadBitmap()
@@ -72,6 +84,7 @@ namespace RunningTracker.ViewModels
             get => _selectedActivityDate;
             set => this.RaiseAndSetIfChanged(ref _selectedActivityDate, value);
         }
+
         public ObservableCollection<StaticPanelViewModel> MapPanels { get; } = new();
 
         public ObservableCollection<string> ActivityDates { get; } = new();

@@ -5,7 +5,7 @@ using RunningTracker.ViewModels;
 
 namespace RunningTracker.Views
 {
-    public partial class ImportActivitiesWindow : ReactiveWindow<SettingsWindowViewModel>
+    public partial class ImportActivitiesWindow : ReactiveWindow<ImportActivitiesWindowViewModel>
     {
         public ImportActivitiesWindow()
         {
