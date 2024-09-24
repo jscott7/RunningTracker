@@ -17,6 +17,7 @@
 	</Design.DataContext>
 	<StackPanel Margin="10">
 		<TextBlock Margin="0 5" >Load Activites</TextBlock>
+		<Button Command="{Binding LoadActivitiesCommand}" Content="Load Activities"/>
 		<TextBox Watermark=""/>
 		<StackPanel Orientation="Horizontal">
 			<Button Command="{Binding OkCommand}" Content="OK"/>

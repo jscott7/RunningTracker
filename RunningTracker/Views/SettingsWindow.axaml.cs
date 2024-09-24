@@ -14,7 +14,6 @@ namespace RunningTracker.Views
             // Subscribe to Reactive Commands and close this Window if they have been triggered
             this.WhenActivated(d => d(ViewModel!.OkCommand.Subscribe(Close)));
             this.WhenActivated(d => d(ViewModel!.CancelCommand.Subscribe(Close)));
-
         }
     }
 }
