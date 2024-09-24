@@ -36,11 +36,11 @@
 					</Button>
 				</StackPanel>
 			</Panel>
-			<ListBox Items="{Binding ActivityDates}" SelectedItem="{Binding SelectedActivityDate}" Grid.Row="1" Grid.Column="0">
+			<ListBox ItemsSource="{Binding ActivityDates}" SelectedItem="{Binding SelectedActivityDate}" Grid.Row="1" Grid.Column="0">
 			</ListBox>
 			<DockPanel Grid.Row="1" Grid.Column="1">
 				<Button Command="{Binding LoadMapCommand}" Content="Load Map" DockPanel.Dock="Top"/>
-				<ListBox Items="{Binding MapPanels}" Background="Transparent" Padding="0" Margin="0">
+				<ListBox ItemsSource="{Binding MapPanels}" Background="Transparent" Padding="0" Margin="0">
 					<ListBox.ItemsPanel>
 						<ItemsPanelTemplate>
 							<WrapPanel/>

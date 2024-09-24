@@ -1,3 +1,4 @@
+using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using ReactiveUI;
 using RunningTracker.Models;
@@ -8,9 +9,14 @@ namespace RunningTracker.Views
 {
     public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
     {
+        private void init()
+        {
+            AvaloniaXamlLoader.Load(this);
+        }
+
         public MainWindow()
         {
-            InitializeComponent();
+            init();
             this.WhenActivated(d => d(ViewModel!.ShowDialog.RegisterHandler(DoShowDialogAsync)));
             this.WhenActivated(d => d(ViewModel!.ShowImportActivitiesDialog.RegisterHandler(DoShowImportActivitiesDialog)));
         }

@@ -7,9 +7,14 @@ namespace RunningTracker
 {
     public class ViewLocator : IDataTemplate
     {
-        public IControl Build(object data)
+        public bool Match(object data)
         {
-            var name = data.GetType().FullName!.Replace("ViewModel", "View");
+            return data is ViewModelBase;
+        }
+
+        Control? ITemplate<object?, Control?>.Build(object? param)
+        {
+            var name = param?.GetType().FullName!.Replace("ViewModel", "View");
             var type = Type.GetType(name);
 
             if (type != null)
@@ -20,11 +25,6 @@ namespace RunningTracker
             {
                 return new TextBlock { Text = "Not Found: " + name };
             }
-        }
-
-        public bool Match(object data)
-        {
-            return data is ViewModelBase;
         }
     }
 }

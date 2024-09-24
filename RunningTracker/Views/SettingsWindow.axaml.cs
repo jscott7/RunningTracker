@@ -1,3 +1,4 @@
+using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using ReactiveUI;
 using RunningTracker.ViewModels;
@@ -7,9 +8,14 @@ namespace RunningTracker.Views
 {
     public partial class SettingsWindow : ReactiveWindow<SettingsWindowViewModel>
     {
+        private void init()
+        {
+            AvaloniaXamlLoader.Load(this);
+        }
         public SettingsWindow()
         {
-            InitializeComponent();
+            //InitializeComponent();
+            init();
 
             // Subscribe to Reactive Commands and close this Window if they have been triggered
             this.WhenActivated(d => d(ViewModel!.OkCommand.Subscribe(Close)));
