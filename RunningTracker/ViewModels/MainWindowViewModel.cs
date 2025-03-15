@@ -27,13 +27,24 @@ namespace RunningTracker.ViewModels
             SettingsCommand = ReactiveCommand.Create(async () => await OpenSettings());
             ImportActivitiesCommand = ReactiveCommand.Create(async () => await OpenImportActivities());
 
-            _logbook = Persistence.LoadLogbook(LogbookPath);
-            foreach (var activity in _logbook.Activities.Skip(_logbook.Activities.Length - 10))
+            try
             {
-                ActivityDates.Add(activity.StartTime.ToString("yyyy-MM-dd HH:mm:ss"));
-            }
+                _logbook = Persistence.LoadLogbook(LogbookPath);
 
-            ActivityDates = new ObservableCollection<string>(ActivityDates.OrderByDescending(i => i));          
+                if (_logbook == null) { return; }
+
+                foreach (var activity in _logbook.Activities.Skip(_logbook.Activities.Length - 10))
+                {
+                    ActivityDates.Add(activity.StartTime.ToString("yyyy-MM-dd HH:mm:ss"));
+                }
+
+                ActivityDates = new ObservableCollection<string>(ActivityDates.OrderByDescending(i => i));
+            }
+            catch (Exception e)
+            {
+                // TODO : Handle this
+                Console.WriteLine(e);
+            }
         }
 
         public ICommand LoadMapCommand { get; }
