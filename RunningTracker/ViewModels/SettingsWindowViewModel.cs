@@ -20,6 +20,8 @@ namespace RunningTracker.ViewModels
             {                  
                 return _settingsData;
             });
+
+            _settingsData = new SettingsData();
         }
 
         /// <summary>
@@ -33,5 +35,7 @@ namespace RunningTracker.ViewModels
         /// For example Close
         /// </summary>
         public ReactiveCommand<Unit, SettingsData?> CancelCommand { get; }
+       
+        public string ApiKey => _settingsData.ApiKey;
     }
 }

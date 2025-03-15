@@ -49,13 +49,13 @@ namespace RunningTracker.ViewModels
         public async Task OpenSettings()
         {
             var settings = new SettingsWindowViewModel();
-            var result = await ShowDialog.Handle(settings);     
+            await ShowDialog.Handle(settings);     
         }
 
         public async Task OpenImportActivities()
         {
             var importActivitesViewModel = new ImportActivitiesWindowViewModel();
-            var result = await ShowImportActivitiesDialog.Handle(importActivitesViewModel);
+            await ShowImportActivitiesDialog.Handle(importActivitesViewModel);
         }
 
         public async Task LoadBitmap()

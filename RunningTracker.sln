@@ -11,11 +11,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GPSLib", "GPSLib\GPSLib.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RunningTracker", "RunningTracker\RunningTracker.csproj", "{E3F57D9C-6F98-4D78-BEB6-8F9B8D62E216}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{20BEA8EA-65BC-492C-98DE-F0A7DC13B05B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Utilities.csproj", "{20BEA8EA-65BC-492C-98DE-F0A7DC13B05B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitSDK", "FitSDK\FitSDK.csproj", "{8D074E5C-7E4B-4C11-A672-0254D4B2D122}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportTracksDataModel", "SportTracksDataModel\SportTracksDataModel.csproj", "{D02610F3-5A32-453F-8E57-0ECEC52522BF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{102C2520-6EF8-4ACF-8767-15A6C5470245}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
