@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 
-namespace Test
+namespace UnitTests
 {
     internal class GPSTest
     {

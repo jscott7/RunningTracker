@@ -9,7 +9,7 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 using Utilities;
 
-namespace Test
+namespace UnitTests
 {
     public class IOTest
     {

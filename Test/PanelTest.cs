@@ -2,7 +2,7 @@
 using SportTracksXmlReader;
 using Utilities;
 
-namespace Test
+namespace UnitTests
 {
     public class PanelTest
     {
