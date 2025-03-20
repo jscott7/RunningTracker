@@ -21,7 +21,6 @@ namespace RunningTracker.ViewModels
             {   
                 if (_settingsData != null)
                 {
-                    // TODO: ApiKey is not being updated from the UI
                     SettingsPersistence.SaveApiKey(ApiKey);
                 }
 
@@ -43,6 +42,9 @@ namespace RunningTracker.ViewModels
         /// </summary>
         public ReactiveCommand<Unit, SettingsData?> CancelCommand { get; }
        
-        public string ApiKey => _settingsData.ApiKey;
+        public string ApiKey { 
+            get {  return _settingsData.ApiKey; } 
+            set {  this.RaiseAndSetIfChanged(ref _settingsData.ApiKey, value); }
+        }
     }
 }
