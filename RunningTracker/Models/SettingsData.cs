@@ -7,6 +7,11 @@ namespace RunningTracker.Models
     /// </summary>
     public class SettingsData : ReactiveObject
     {
-        public string ApiKey => "NEED TO LOAD REAL SETTINGS HERE";
+        public SettingsData(string apiKey)
+        {
+            ApiKey = apiKey;
+        }
+
+        public string ApiKey;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using ReactiveUI;
 using RunningTracker.Models;
 using System.Reactive;
+using Utilities;
 
 namespace RunningTracker.ViewModels
 {
@@ -17,11 +18,17 @@ namespace RunningTracker.ViewModels
             });
 
             OkCommand = ReactiveCommand.Create(() =>
-            {                  
+            {   
+                if (_settingsData != null)
+                {
+                    // TODO: ApiKey is not being updated from the UI
+                    SettingsPersistence.SaveApiKey(ApiKey);
+                }
+
                 return _settingsData;
             });
 
-            _settingsData = new SettingsData();
+            _settingsData = new SettingsData(SettingsPersistence.ApiKey);
         }
 
         /// <summary>
