@@ -32,8 +32,12 @@ namespace RunningTracker.ViewModels
                 _logbook = Persistence.LoadLogbook(LogbookPath);
 
                 if (_logbook == null) { return; }
+                var sortedActivities = _logbook.Activities
+                    .OrderBy(o => o.StartTime)
+                    .Skip(_logbook.Activities.Length - 10)
+                    .ToList();
 
-                foreach (var activity in _logbook.Activities.Skip(_logbook.Activities.Length - 10))
+                foreach (var activity in sortedActivities)
                 {
                     ActivityDates.Add(activity.StartTime.ToString("yyyy-MM-dd HH:mm:ss"));
                 }

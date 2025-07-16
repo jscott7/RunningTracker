@@ -4,6 +4,8 @@ namespace RunningTracker.Models
 {
     /// <summary>
     /// Container for results returned from settings dialog
+    /// 
+    /// TODO Add location of logbook
     /// </summary>
     public class SettingsData : ReactiveObject
     {
