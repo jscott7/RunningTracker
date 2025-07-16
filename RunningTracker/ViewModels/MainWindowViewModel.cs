@@ -14,7 +14,7 @@ namespace RunningTracker.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         private string? _selectedActivityDate;
-        private readonly Logbook _logbook;
+        private readonly Logbook? _logbook;
 
         private readonly string LogbookPath = @"History.logbook3";
 
@@ -32,6 +32,7 @@ namespace RunningTracker.ViewModels
                 _logbook = Persistence.LoadLogbook(LogbookPath);
 
                 if (_logbook == null) { return; }
+
                 var sortedActivities = _logbook.Activities
                     .OrderBy(o => o.StartTime)
                     .Skip(_logbook.Activities.Length - 10)
@@ -42,12 +43,13 @@ namespace RunningTracker.ViewModels
                     ActivityDates.Add(activity.StartTime.ToString("yyyy-MM-dd HH:mm:ss"));
                 }
 
-                ActivityDates = new ObservableCollection<string>(ActivityDates.OrderByDescending(i => i));
+                // Use spread element ..e to add all elements in the expression
+                // Added in C# 12
+                ActivityDates = [..ActivityDates.OrderByDescending(i => i)];
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // TODO : Handle this
-                Console.WriteLine(e);
             }
         }
 
