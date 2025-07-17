@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using Utilities;
 
 namespace RunningTracker.Models
@@ -18,26 +17,8 @@ namespace RunningTracker.Models
                     return secretValue.APIKey;
                 }
 
-                var appPath = Path.Combine(
-                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                    "RunningTracker", 
-                    "appdata.txt");
 
-                var apiKey = "";
-                if (File.Exists(appPath))
-                {
-                    foreach(var line in File.ReadAllLines(appPath))
-                    {
-                        var kvp = line.Split('=');
-
-                        if (kvp.Length == 2 && kvp[0].Equals("APIKEY", StringComparison.OrdinalIgnoreCase))
-                        {
-                            apiKey = kvp[1];
-                        }
-                    }
-                }
-
-                return apiKey;     
+                return SettingsPersistence.ApiKey; 
             }
             catch (Exception ex)
             {

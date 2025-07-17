@@ -4,16 +4,17 @@ namespace RunningTracker.Models
 {
     /// <summary>
     /// Container for results returned from settings dialog
-    /// 
-    /// TODO Add location of logbook
     /// </summary>
     public class SettingsData : ReactiveObject
     {
-        public SettingsData(string apiKey)
+        public SettingsData(string apiKey, string logbookPath)
         {
             ApiKey = apiKey;
+            LogbookPath = logbookPath;
         }
 
         public string ApiKey;
+
+        public string LogbookPath;
     }
 }

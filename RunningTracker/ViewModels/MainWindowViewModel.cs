@@ -16,8 +16,6 @@ namespace RunningTracker.ViewModels
         private string? _selectedActivityDate;
         private readonly Logbook? _logbook;
 
-        private readonly string LogbookPath = @"History.logbook3";
-
         public MainWindowViewModel()
         {
             ShowDialog = new Interaction<SettingsWindowViewModel, Models.SettingsData?>();
@@ -28,8 +26,8 @@ namespace RunningTracker.ViewModels
             ImportActivitiesCommand = ReactiveCommand.Create(async () => await OpenImportActivities());
 
             try
-            {
-                _logbook = Persistence.LoadLogbook(LogbookPath);
+            {        
+                _logbook = Persistence.LoadLogbook(SettingsPersistence.LogbookPath);
 
                 if (_logbook == null) { return; }
 

@@ -3,13 +3,13 @@
         xmlns:vm="using:RunningTracker.ViewModels"
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="150"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="200"
         x:Class="RunningTracker.Views.SettingsWindow"
         Title="SettingsWindow"
 		TransparencyLevelHint="AcrylicBlur"
 		Background="Transparent"
 		ExtendClientAreaToDecorationsHint="True"
-		Width="400" Height="150"
+		Width="400" Height="400"
 	    WindowStartupLocation="CenterOwner">
 	
 	<Design.DataContext>
@@ -19,7 +19,11 @@
 	<StackPanel Margin="10">
 		<TextBlock Margin="0 5" >APIKey:</TextBlock>
 		<TextBox Watermark="Thunderforest APIKey" Text="{Binding ApiKey}"/>
+		<TextBlock Margin="0 5" >Logbook Path</TextBlock>
+		<TextBox Watermark="Logbook Path" Text="{Binding LogbookPath}"/>
+		<TextBlock></TextBlock>	
 		<StackPanel Orientation="Horizontal">
+
 			<Button Command="{Binding OkCommand}" Content="OK"/>
 			<Button Command="{Binding CancelCommand}" Content="Cancel"/>
 		</StackPanel>

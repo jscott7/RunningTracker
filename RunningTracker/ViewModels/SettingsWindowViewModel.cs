@@ -9,25 +9,27 @@ namespace RunningTracker.ViewModels
     {
         private SettingsData? _settingsData;
 
-        public SettingsWindowViewModel() {
+        public SettingsWindowViewModel()
+        {
 
             // Behaviours for OK and Cancel Button click
-            CancelCommand = ReactiveCommand.Create(() => 
-            {            
+            CancelCommand = ReactiveCommand.Create(() =>
+            {
                 return _settingsData;
             });
 
             OkCommand = ReactiveCommand.Create(() =>
-            {   
+            {
                 if (_settingsData != null)
                 {
                     SettingsPersistence.SaveApiKey(ApiKey);
+                    SettingsPersistence.SaveLogbookPath(LogbookPath);
                 }
 
                 return _settingsData;
             });
 
-            _settingsData = new SettingsData(SettingsPersistence.ApiKey);
+            _settingsData = new SettingsData(SettingsPersistence.ApiKey, SettingsPersistence.LogbookPath);
         }
 
         /// <summary>
@@ -35,16 +37,23 @@ namespace RunningTracker.ViewModels
         /// For example Close
         /// </summary>
         public ReactiveCommand<Unit, SettingsData?> OkCommand { get; }
-    
+
         /// <summary>
         /// Command linked to Cancel button. Needs to be ReactiveCommand so it can be hooked into Window events.
         /// For example Close
         /// </summary>
         public ReactiveCommand<Unit, SettingsData?> CancelCommand { get; }
-       
-        public string ApiKey { 
-            get {  return _settingsData.ApiKey; } 
-            set {  this.RaiseAndSetIfChanged(ref _settingsData.ApiKey, value); }
+
+        public string ApiKey
+        {
+            get { return _settingsData.ApiKey; }
+            set { this.RaiseAndSetIfChanged(ref _settingsData.ApiKey, value); }
+        }
+
+        public string LogbookPath
+        {
+            get { return _settingsData.LogbookPath; }
+            set { this.RaiseAndSetIfChanged(ref _settingsData.LogbookPath, value); }
         }
     }
 }
