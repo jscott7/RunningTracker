@@ -23,20 +23,23 @@ Model for data used in settings window
 
 ### To open
 Add the following to MainWindowViewModel.cs
-```
-public ICommand SettingsCommand { get; }`
+
+```csharp
+public ICommand SettingsCommand { get; }
 public Interaction<SettingsWindowViewModel, Models.SettingsData?> ShowDialog { get; }
 ```
 
-```
+```csharp
 public MainWindowViewModel()
 {
    ShowDialog = new Interaction<SettingsWindowViewModel, Models.SettingsData?>();
-   SettingsCommand = ReactiveCommand.Create(async () => await OpenSettings());`
+   SettingsCommand = ReactiveCommand.Create(async () => await OpenSettings());
 
+   // Remaining constructor logic
+}
 ``` 
 
-```
+```csharp
 public async Task OpenSettings()
 {
     var settings = new SettingsWindowViewModel();
