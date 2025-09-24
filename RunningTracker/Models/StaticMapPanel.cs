@@ -11,6 +11,12 @@ namespace RunningTracker.Models
         private float _longitude;
         private int _zoom;
 
+        /// <summary>
+        /// Creates an instance of a StaticMapPanel
+        /// </summary>
+        /// <param name="latitude">Latitude of middle of panel</param>
+        /// <param name="longitude">Longituge of middle of panel</param>
+        /// <param name="zoom">Zoom of image. Higher numbers mean bigger zoom</param>
         public StaticMapPanel(float latitude, float longitude, int zoom)
         {
             _latitude = latitude;

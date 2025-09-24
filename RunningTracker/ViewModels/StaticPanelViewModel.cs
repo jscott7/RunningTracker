@@ -15,11 +15,12 @@ namespace RunningTracker.ViewModels
         private Bitmap? _mapPanel;
         private StaticMapPanel _mapPanelModel;
         private GPSRoute _gpsRoute;
+        private int _zoom;
 
         public StaticPanelViewModel(GPSRoute gpsRoute, int zoom = 14)
         {
             _gpsRoute = gpsRoute;
-
+            _zoom = zoom;
             var midPoint = MapPanelHelper.GetMidLatLong(gpsRoute);
             _mapPanelModel = new StaticMapPanel(midPoint.latMid, midPoint.longMid, zoom);
         }
@@ -54,7 +55,7 @@ namespace RunningTracker.ViewModels
         }
 
         /// <summary>
-        /// Placeholder for drawing a route onto the bitmap
+        /// Draws a route onto the bitmap
         /// </summary>
         /// <param name="bitmap">Clean map</param>
         /// <returns>Original Bitmap with route overlaid</returns>
@@ -71,8 +72,8 @@ namespace RunningTracker.ViewModels
             var gpsRouteInfo = MapPanelHelper.GetMidLatLong(_gpsRoute);
          
             var parallelMultiplier = Math.Cos(gpsRouteInfo.latMid * Math.PI / 180);
-            var degreesPerPixelX = 360 / Math.Pow(2, 14 + 8);
-            var degreesPerPixelY = 360 / Math.Pow(2, 14 + 8) * parallelMultiplier;
+            var degreesPerPixelX = 360 / Math.Pow(2, _zoom + 8);
+            var degreesPerPixelY = 360 / Math.Pow(2, _zoom + 8) * parallelMultiplier;
 
             var centerPt = new System.Drawing.Point(editableBitmap.Width / 2, editableBitmap.Height / 2);
             var centerLat = gpsRouteInfo.latMid;
