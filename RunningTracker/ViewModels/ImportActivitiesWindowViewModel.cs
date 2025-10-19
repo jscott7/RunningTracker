@@ -1,17 +1,13 @@
-﻿
-using ReactiveUI;
+﻿using ReactiveUI;
 using RunningTracker.Models;
-using System.IO;
-using System;
 using System.Reactive;
 using System.Threading.Tasks;
-using System.Threading;
 
 namespace RunningTracker.ViewModels
 {
     public class ImportActivitiesWindowViewModel : ViewModelBase
     {
-        // TODO Need to change this type
+        // TODO Need to change this type, ultimately to a list of activities to import
         private SettingsData? _settingsData;
 
         public ImportActivitiesWindowViewModel() {
@@ -25,6 +21,8 @@ namespace RunningTracker.ViewModels
             {
                 return _settingsData;
             });
+
+            LoadActivitiesCommand = ReactiveCommand.CreateFromTask(OpenFilePickerAsync);
         }
 
         /// <summary>
@@ -38,5 +36,41 @@ namespace RunningTracker.ViewModels
         /// For example Close
         /// </summary>
         public ReactiveCommand<Unit, SettingsData?> CancelCommand { get; }
+
+        /// <summary>
+        /// Command linked to Load Activities button.
+        /// </summary>
+        public ReactiveCommand<Unit, string?> LoadActivitiesCommand { get; }
+
+        private async Task<string?> OpenFilePickerAsync()
+        {
+            var window = App.Current.ApplicationLifetime is Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop
+                ? desktop.MainWindow
+                : null;
+
+            if (window?.StorageProvider == null)
+                return null;
+
+            var options = new Avalonia.Platform.Storage.FilePickerOpenOptions
+            {
+                Title = "Select Activity File to Import",
+                AllowMultiple = false,
+                FileTypeFilter =
+                [
+                    new Avalonia.Platform.Storage.FilePickerFileType("Activity Files")
+                    {
+                        Patterns = [ "*.gpx", "*.tcx", "*.fit" ]
+                    }
+                ]
+            };
+
+            var files = await window.StorageProvider.OpenFilePickerAsync(options);
+            if (files != null && files.Count > 0)
+            {
+                return files[0].Path.LocalPath;
+            }
+
+            return null;
+        }
     }
 }

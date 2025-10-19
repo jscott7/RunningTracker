@@ -18,7 +18,7 @@ namespace RunningTracker.Views
             init();
 
             // Subscribe to Reactive Commands
-            //this.WhenActivated(d => d(ViewModel!.LoadActivitiesCommand.Subscribe(Close)));
+            this.WhenActivated(d => d(ViewModel!.LoadActivitiesCommand.Subscribe(Close)));
             this.WhenActivated(d => d(ViewModel!.OkCommand.Subscribe(Close)));
             this.WhenActivated(d => d(ViewModel!.CancelCommand.Subscribe(Close)));
         }
