@@ -16,9 +16,9 @@
 		<vm:ImportActivitiesWindowViewModel/>
 	</Design.DataContext>
 	<StackPanel Margin="10">
-		<TextBlock Margin="0 5" >Load Activites</TextBlock>
+		<TextBlock Margin="0 5" >Find Activites</TextBlock>
 		<Button Command="{Binding LoadActivitiesCommand}" Content="Load Activities"/>
-		<TextBox Watermark=""/>
+		<TextBox Watermark="Fit File Path" Text="{Binding FitFilePath}"/>
 		<StackPanel Orientation="Horizontal">
 			<Button Command="{Binding OkCommand}" Content="OK"/>
 			<Button Command="{Binding CancelCommand}" Content="Cancel"/>

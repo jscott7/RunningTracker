@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Logbook xmlns="urn:uuid:D0EB2ED5-49B6-44e3-B13C-CF15BE7DD7DD" version="3.0" referenceId="7eac03cf-d325-45f5-bbf3-06a62211e024">
+  <Metadata created="2026-02-16T00:00:00Z" modified="2026-02-16T00:00:00Z" />
+  <Athlete referenceId="ff77edc4-ed45-4e2e-be74-58fd6a3abd81" name="Template" sex="Male" dateOfBirth="2026-02-16T00:00:00" heightCentimeters="0">
+    <Metadata created="2026-02-16T00:00:00Z" modified="2026-02-16T00:00:00Z" />
+    <History>
+    </History>
+  </Athlete>
+  <ClimbZones>
+    <Category name="Standard" referenceId="ff5cb285-0ae7-4a24-bee9-a6e943e70bdb">
+      <Zones>
+        <Zone name="Ascending" low="2" />
+        <Zone name="Flat" flat="true" low="-2" high="2" />
+        <Zone name="Descending" high="-2" />
+      </Zones>
+    </Category>
+  </ClimbZones>
+  <SpeedZones>
+    <Category name="Running" referenceId="0d9e73fc-a274-491b-86aa-25ea7c46fba6">
+      <Zones>
+        <Zone name="Walking" low="0" high="1.78816" />
+        <Zone name="Jogging" low="1.78816" high="2.68224" />
+        <Zone name="Running" low="2.68224" />
+      </Zones>
+    </Category>
+    <Category name="Cycling" referenceId="2da95157-96be-44cb-84b5-90ed7fc4b74c">
+      <Zones>
+        <Zone name="Zone 1" low="0" high="4.4704" />
+        <Zone name="Zone 2" low="4.4704" high="6.7056" />
+        <Zone name="Zone 3" low="6.7056" high="8.9408" />
+        <Zone name="Zone 4" low="8.9408" />
+      </Zones>
+    </Category>
+  </SpeedZones>
+  <HeartRateZones>
+    <Category name="Standard" referenceId="49cebb25-1b98-43e6-89de-763fb649451c">
+      <Zones>
+        <Zone name="Zone 1" low="0" high="120" />
+        <Zone name="Zone 2" low="120" high="140" />
+        <Zone name="Zone 3" low="140" high="160" />
+        <Zone name="Zone 4" low="160" high="180" />
+        <Zone name="Zone 5" low="180" />
+      </Zones>
+    </Category>
+  </HeartRateZones>
+  <CadenceZones>
+    <Category name="Standard" referenceId="12fe431f-e898-44be-8744-e199b0842b0c">
+      <Zones>
+        <Zone name="Cadence" low="0" />
+      </Zones>
+    </Category>
+  </CadenceZones>
+  <PowerZones>
+    <Category name="Standard" referenceId="20ab52df-5423-4085-9cea-93942e2195a9">
+      <Zones>
+        <Zone name="Power" low="0" />
+      </Zones>
+    </Category>
+  </PowerZones>
+  <CustomDataFieldDefinitions>
+   <Field id="ab32b8ce-30e2-4795-a21b-51c7c481f8f5" objectType="IActivity" dataType="6e0f7115-6aa3-49ea-a855-966ce17317a1" name="Training effect" groupAgg="Sum" options="#$x02|1|1" />
+    <Field id="b4afe9f2-8537-4d05-990c-1a632d5dd1fa" objectType="IActivity" dataType="cd8a0b82-2939-4b46-bec0-bac3e4b995b0" name="Recovery time" groupAgg="Average" options="" createdBy="d441f75c-0b8a-40aa-b35f-3dda251f3e8b" />
+    <Field id="f5f76627-1c66-45f3-bcc3-94e2417ae29e" objectType="IAthleteInfoEntry" dataType="cd8a0b82-2939-4b46-bec0-bac3e4b995b0" name="Recovery time" groupAgg="Average" options="" createdBy="d441f75c-0b8a-40aa-b35f-3dda251f3e8b" />
+    <Field id="283fad75-9314-43c6-a468-6542f2413e87" objectType="IActivity" dataType="6e0f7115-6aa3-49ea-a855-966ce17317a1" name="Avg. stride length [m]" groupAgg="Average" options="#$x02|2|0" createdBy="d441f75c-0b8a-40aa-b35f-3dda251f3e8b" />
+    <Field id="2511a85a-2608-4b09-a939-dc7742a3cde1" objectType="IActivity" dataType="6e0f7115-6aa3-49ea-a855-966ce17317a1" name="Strides" groupAgg="Sum" options="#$x02|0|0" createdBy="d441f75c-0b8a-40aa-b35f-3dda251f3e8b" />
+    <Field id="046deafd-1f8f-416f-ba1e-d16b97c7fe91" objectType="IActivity" dataType="92a61b66-ea3a-4ef3-9505-207c1261e762" name="Activity Profile" groupAgg="SameOrMultiple" options="" createdBy="d441f75c-0b8a-40aa-b35f-3dda251f3e8b" />
+  </CustomDataFieldDefinitions>
+<ActivityCategories>
+    <Category referenceId="fa756214-cf71-11db-9705-005056c00008" name="My Activities" useParentSettings="false" speedUnits="Pace" stoppedSpeed="0" speedZone="0d9e73fc-a274-491b-86aa-25ea7c46fba6" heartRateZone="49cebb25-1b98-43e6-89de-763fb649451c" useSystemLengthUnits="true">
+      <Metadata created="2008-02-14T19:52:40Z" modified="2013-02-01T19:43:25Z" />
+      <Categories>
+        <ActivityCategory referenceId="bfd57794-a1ac-41ca-a3f1-8a1c586b8478" name="Running" useParentSettings="false" speedUnits="Pace" stoppedSpeed="1.0729" calorieCalculationMethod="eb285a9a-da4e-11db-9705-005056c00008" speedZone="0d9e73fc-a274-491b-86aa-25ea7c46fba6" heartRateZone="49cebb25-1b98-43e6-89de-763fb649451c" useSystemLengthUnits="true">
+          <Metadata created="2008-02-14T19:52:40Z" modified="2013-02-01T19:43:25Z" />
+          <Categories>
+            <ActivityCategory referenceId="3e1694e8-2549-4e87-b168-7361cef29396" name="Speed" useParentSettings="true" useSystemLengthUnits="true">
+              <Metadata created="2008-02-14T19:52:40Z" modified="2008-02-14T19:52:40Z" />
+            </ActivityCategory>
+            <ActivityCategory referenceId="a87a0f33-465b-41f2-ab8b-70303481fda5" name="Hills" useParentSettings="true" useSystemLengthUnits="true">
+              <Metadata created="2008-02-14T19:52:40Z" modified="2008-02-14T19:52:40Z" />
+            </ActivityCategory>
+            <ActivityCategory referenceId="09c8f76e-7be8-4d41-a1b4-5834b22f8779" name="Trail" useParentSettings="true" useSystemLengthUnits="true">
+              <Metadata created="2008-02-14T19:52:40Z" modified="2008-02-14T19:52:40Z" />
+            </ActivityCategory>
+            <ActivityCategory referenceId="5afeb032-6a7b-42d9-8c3f-4aa719353413" name="Treadmill" useParentSettings="true" useSystemLengthUnits="true">
+              <Metadata created="2008-02-14T19:52:40Z" modified="2008-02-14T19:52:40Z" />
+            </ActivityCategory>
+            <ActivityCategory referenceId="79b93111-6997-4d26-b7e4-0ae3b0f0ab80" name="Race" useParentSettings="true" useSystemLengthUnits="true">
+              <Metadata created="2008-02-14T19:52:40Z" modified="2008-02-14T19:52:40Z" />
+            </ActivityCategory>
+          </Categories>
+        </ActivityCategory>
+        <ActivityCategory referenceId="f3e208c1-aa8e-42f3-ae42-241d502e6417" name="Cycling" useParentSettings="false" speedUnits="Speed" stoppedSpeed="0" calorieCalculationMethod="dece6d1c-db24-11db-9705-005056c00008" speedZone="2da95157-96be-44cb-84b5-90ed7fc4b74c" heartRateZone="49cebb25-1b98-43e6-89de-763fb649451c" useSystemLengthUnits="true">
+          <Metadata created="2008-02-14T19:52:40Z" modified="2013-02-01T19:43:25Z" />
+          <Categories>
+            <ActivityCategory referenceId="aff0549a-6545-4b60-91e1-89b7679e04d2" name="Road" useParentSettings="true" useSystemLengthUnits="true">
+              <Metadata created="2008-02-14T19:52:40Z" modified="2008-02-14T19:52:40Z" />
+            </ActivityCategory>
+            <ActivityCategory referenceId="e45302db-51f0-464b-8b22-8a2fc41ed453" name="Trail" useParentSettings="true" useSystemLengthUnits="true">
+              <Metadata created="2008-02-14T19:52:40Z" modified="2008-02-14T19:52:40Z" />
+            </ActivityCategory>
+            <ActivityCategory referenceId="dd6a2bb5-eb73-4eca-93c8-324498d59fa1" name="Race" useParentSettings="true" useSystemLengthUnits="true">
+              <Metadata created="2008-02-14T19:52:40Z" modified="2008-02-14T19:52:40Z" />
+            </ActivityCategory>
+          </Categories>
+        </ActivityCategory>
+        <ActivityCategory referenceId="0bd67a45-a1d2-4ba1-8b51-fde0120634b9" name="Swimming" useParentSettings="false" speedUnits="Pace" stoppedSpeed="0" calorieCalculationMethod="c350cf0c-db25-11db-9705-005056c00008" speedZone="0d9e73fc-a274-491b-86aa-25ea7c46fba6" heartRateZone="49cebb25-1b98-43e6-89de-763fb649451c" useSystemLengthUnits="false" distanceUnits="Yard" elevationUnits="Foot">
+          <Metadata created="2008-02-14T19:52:40Z" modified="2008-02-14T19:52:40Z" />
+        </ActivityCategory>
+        <ActivityCategory referenceId="663a4434-7f78-474c-8912-d159b5441c77" name="Other" useParentSettings="true" useSystemLengthUnits="true">
+          <Metadata created="2008-02-14T19:52:40Z" modified="2008-02-14T19:52:40Z" />
+        </ActivityCategory>
+      </Categories>
+    </Category>
+    <Category referenceId="0277c86c-cf72-11db-9705-005056c00008" name="My Friends Activities" useParentSettings="false" speedUnits="Pace" stoppedSpeed="0" speedZone="0d9e73fc-a274-491b-86aa-25ea7c46fba6" heartRateZone="49cebb25-1b98-43e6-89de-763fb649451c" useSystemLengthUnits="true">
+      <Metadata created="2008-02-14T19:52:40Z" modified="2013-02-01T19:43:25Z" />
+      <Categories>
+        <ActivityCategory referenceId="110968d4-393f-449d-a1b0-847e8bb86a2d" name="Imported" useParentSettings="true" useSystemLengthUnits="true">
+          <Metadata created="2008-02-14T19:52:40Z" modified="2008-02-14T19:52:40Z" />
+        </ActivityCategory>
+      </Categories>
+    </Category>
+  </ActivityCategories>
+  <Activities>
+  </Activities>
+</Logbook>  

@@ -6,36 +6,37 @@ using System.Threading.Tasks;
 namespace RunningTracker.ViewModels
 {
     public class ImportActivitiesWindowViewModel : ViewModelBase
-    {
-        // TODO Need to change this type, ultimately to a list of activities to import
-        private SettingsData? _settingsData;
+    {      
+        private ImportedActivitesData? _importedActivitiesData;
 
         public ImportActivitiesWindowViewModel() {
             // Behaviours for OK and Cancel Button click
             CancelCommand = ReactiveCommand.Create(() =>
             {
-                return _settingsData;
+                return _importedActivitiesData;
             });
 
             OkCommand = ReactiveCommand.Create(() =>
             {
-                return _settingsData;
+                return _importedActivitiesData;
             });
 
             LoadActivitiesCommand = ReactiveCommand.CreateFromTask(OpenFilePickerAsync);
+
+            _importedActivitiesData = new ImportedActivitesData();
         }
 
         /// <summary>
         /// Command linked to OK button. Needs to be ReactiveCommand so it can be hooked into Window events.
         /// For example Close
         /// </summary>
-        public ReactiveCommand<Unit, SettingsData?> OkCommand { get; }
+        public ReactiveCommand<Unit, ImportedActivitesData?> OkCommand { get; }
       
         /// <summary>
         /// Command linked to Cancel button. Needs to be ReactiveCommand so it can be hooked into Window events.
         /// For example Close
         /// </summary>
-        public ReactiveCommand<Unit, SettingsData?> CancelCommand { get; }
+        public ReactiveCommand<Unit, ImportedActivitesData?> CancelCommand { get; }
 
         /// <summary>
         /// Command linked to Load Activities button.
@@ -67,10 +68,17 @@ namespace RunningTracker.ViewModels
             var files = await window.StorageProvider.OpenFilePickerAsync(options);
             if (files != null && files.Count > 0)
             {
-                return files[0].Path.LocalPath;
+                // TODO Fix binding
+                this.RaiseAndSetIfChanged(ref _importedActivitiesData.FitFilePath, files[0].Path.LocalPath);            
             }
 
             return null;
+        }
+
+        public string FitFilePath
+        {
+            get { return _importedActivitiesData.FitFilePath; }
+            set { this.RaiseAndSetIfChanged(ref _importedActivitiesData.FitFilePath, value); }
         }
     }
 }
