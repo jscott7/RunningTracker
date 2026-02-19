@@ -26,24 +26,12 @@ namespace RunningTracker.ViewModels
             ImportActivitiesCommand = ReactiveCommand.Create(async () => await OpenImportActivities());
 
             try
-            {        
+            {
                 _logbook = Persistence.LoadLogbook(SettingsPersistence.LogbookPath);
 
                 if (_logbook == null) { return; }
 
-                var sortedActivities = _logbook.Activities
-                    .OrderBy(o => o.StartTime)
-                    .Skip(_logbook.Activities.Length - 10)
-                    .ToList();
-
-                foreach (var activity in sortedActivities)
-                {
-                    ActivityDates.Add(activity.StartTime.ToString("yyyy-MM-dd HH:mm:ss"));
-                }
-
-                // Use spread element ..e to add all elements in the expression
-                // Added in C# 12
-                ActivityDates = [..ActivityDates.OrderByDescending(i => i)];
+                RefreshActivities();
             }
             catch (Exception)
             {
@@ -56,15 +44,15 @@ namespace RunningTracker.ViewModels
         public ICommand SettingsCommand { get; }
 
         public ICommand ImportActivitiesCommand { get; }
-      
+
         public Interaction<SettingsWindowViewModel, Models.SettingsData?> ShowDialog { get; }
 
         public Interaction<ImportActivitiesWindowViewModel, Models.ImportedActivitesData?> ShowImportActivitiesDialog { get; }
-  
+
         public async Task OpenSettings()
         {
             var settings = new SettingsWindowViewModel();
-            await ShowDialog.Handle(settings);  
+            await ShowDialog.Handle(settings);
         }
 
         public async Task OpenImportActivities()
@@ -108,6 +96,29 @@ namespace RunningTracker.ViewModels
         {
             var fitDeserializer = new FitDeserializer();
             fitDeserializer.DeserializeAndAddToLogbook(_logbook, path);
+            RefreshActivities();
+        }
+
+        void RefreshActivities()
+        {
+            ActivityDates.Clear();
+
+            var activityDates = new List<string>();
+            var sortedActivities = _logbook.Activities
+                .OrderBy(o => o.StartTime)
+                .Skip(_logbook.Activities.Length - 10)
+                .ToList();
+
+            foreach (var activity in sortedActivities)
+            {
+                activityDates.Add(activity.StartTime.ToString("yyyy-MM-dd HH:mm:ss"));
+            }
+
+            // Add all elements in descending order to the existing ActivityDates collection
+            foreach (var date in activityDates.OrderByDescending(i => i))
+            {
+                ActivityDates.Add(date);
+            }
         }
     }
 }

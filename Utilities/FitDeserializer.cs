@@ -240,6 +240,11 @@ namespace Utilities
             }
 
             var lat = recordMessage.GetPositionLat();
+            if (lat == null)
+            {
+                return;
+            }
+
             var longit = recordMessage.GetPositionLong();
             var distance = recordMessage.GetDistance();
     
