@@ -103,5 +103,11 @@ namespace RunningTracker.ViewModels
         public ObservableCollection<StaticPanelViewModel> MapPanels { get; } = new();
 
         public ObservableCollection<string> ActivityDates { get; } = new();
+
+        public void LoadActivity(string path)
+        {
+            var fitDeserializer = new FitDeserializer();
+            fitDeserializer.DeserializeAndAddToLogbook(_logbook, path);
+        }
     }
 }

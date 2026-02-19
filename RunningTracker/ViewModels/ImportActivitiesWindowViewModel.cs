@@ -7,12 +7,13 @@ namespace RunningTracker.ViewModels
 {
     public class ImportActivitiesWindowViewModel : ViewModelBase
     {      
-        private ImportedActivitesData? _importedActivitiesData;
+        private readonly ImportedActivitesData _importedActivitiesData;
 
         public ImportActivitiesWindowViewModel() {
             // Behaviours for OK and Cancel Button click
             CancelCommand = ReactiveCommand.Create(() =>
             {
+                _importedActivitiesData?.Clear();
                 return _importedActivitiesData;
             });
 
@@ -28,13 +29,11 @@ namespace RunningTracker.ViewModels
 
         /// <summary>
         /// Command linked to OK button. Needs to be ReactiveCommand so it can be hooked into Window events.
-        /// For example Close
         /// </summary>
         public ReactiveCommand<Unit, ImportedActivitesData?> OkCommand { get; }
       
         /// <summary>
         /// Command linked to Cancel button. Needs to be ReactiveCommand so it can be hooked into Window events.
-        /// For example Close
         /// </summary>
         public ReactiveCommand<Unit, ImportedActivitesData?> CancelCommand { get; }
 
@@ -45,7 +44,7 @@ namespace RunningTracker.ViewModels
 
         private async Task<string?> OpenFilePickerAsync()
         {
-            var window = App.Current.ApplicationLifetime is Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop
+            var window = App.Current?.ApplicationLifetime is Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop
                 ? desktop.MainWindow
                 : null;
 
@@ -68,8 +67,7 @@ namespace RunningTracker.ViewModels
             var files = await window.StorageProvider.OpenFilePickerAsync(options);
             if (files != null && files.Count > 0)
             {
-                // TODO Fix binding
-                this.RaiseAndSetIfChanged(ref _importedActivitiesData.FitFilePath, files[0].Path.LocalPath);            
+                FitFilePath = files[0].Path.LocalPath;           
             }
 
             return null;

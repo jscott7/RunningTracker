@@ -9,14 +9,14 @@ namespace RunningTracker.Views
 {
     public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
     {
-        private void init()
+        private void Init()
         {
             AvaloniaXamlLoader.Load(this);
         }
 
         public MainWindow()
         {
-            init();
+            Init();
             this.WhenActivated(d => d(ViewModel!.ShowDialog.RegisterHandler(DoShowDialogAsync)));
             this.WhenActivated(d => d(ViewModel!.ShowImportActivitiesDialog.RegisterHandler(DoShowImportActivitiesDialog)));
         }
@@ -37,6 +37,12 @@ namespace RunningTracker.Views
             dialog.DataContext = interaction.Input;
 
             var result = await dialog.ShowDialog<ImportedActivitesData?>(this);
+            if (result?.FitFilePath?.Length > 0)
+            {
+                var mainWindowViewModel = (MainWindowViewModel)DataContext!;
+                mainWindowViewModel.LoadActivity(result.FitFilePath);
+            }
+
             interaction.SetOutput(result);
         }
     }

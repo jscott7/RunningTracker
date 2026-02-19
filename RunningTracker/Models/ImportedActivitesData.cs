@@ -7,11 +7,17 @@ namespace RunningTracker.Models
     /// </summary>
     public class ImportedActivitesData : ReactiveObject
     {
+        public string FitFilePath;
+
         public ImportedActivitesData()
         {
             FitFilePath = "";
         }
 
-        public string FitFilePath;
-    }
+        public void Clear()
+        {
+            FitFilePath = "";
+        }
+    }       
+       
 }
