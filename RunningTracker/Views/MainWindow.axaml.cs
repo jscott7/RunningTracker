@@ -17,8 +17,10 @@ namespace RunningTracker.Views
         public MainWindow()
         {
             Init();
-            this.WhenActivated(d => d(ViewModel!.ShowDialog.RegisterHandler(DoShowDialogAsync)));
-            this.WhenActivated(d => d(ViewModel!.ShowImportActivitiesDialog.RegisterHandler(DoShowImportActivitiesDialog)));
+            this.WhenActivated(d => d(ViewModel!.ShowDialog.RegisterHandler(async interaction => await DoShowDialogAsync((InteractionContext<SettingsWindowViewModel, SettingsData?>)interaction))));
+            this.WhenActivated(d => d(ViewModel!.ShowImportActivitiesDialog.RegisterHandler(
+                async interaction => await DoShowImportActivitiesDialog((InteractionContext<ImportActivitiesWindowViewModel, ImportedActivitesData?>)interaction)
+            )));
         }
 
         private async Task DoShowDialogAsync(InteractionContext<SettingsWindowViewModel, SettingsData?> interaction)
