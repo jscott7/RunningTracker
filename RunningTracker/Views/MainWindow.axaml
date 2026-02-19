@@ -28,11 +28,11 @@
 		<Grid Margin="0,40,0,0" ColumnDefinitions="200,*" RowDefinitions="Auto,Auto">
 			<Panel Grid.Row="0" Grid.Column="1">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
-					<Button Content="ImportActivities" Command="{Binding ImportActivitiesCommand}" ToolTip.Tip="Import Activites">
-						<PathIcon Data="{StaticResource arrow_import_regular}" />
+					<Button Command="{Binding ImportActivitiesCommand}" ToolTip.Tip="Import Activites">
+						<PathIcon Data="{StaticResource arrow_import_regular}" Foreground="LightGray" />
 					</Button>			
-					<Button Content="Settings" Command="{Binding SettingsCommand}" ToolTip.Tip="Open Settings">
-						<PathIcon Data="{StaticResource settings_regular}" />
+					<Button Command="{Binding SettingsCommand}" ToolTip.Tip="Open Settings">
+						<PathIcon Data="{StaticResource settings_regular}" Foreground="LightGray" />
 					</Button>
 				</StackPanel>
 			</Panel>

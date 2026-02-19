@@ -15,13 +15,24 @@
 	<Design.DataContext>
 		<vm:ImportActivitiesWindowViewModel/>
 	</Design.DataContext>
-	<StackPanel Margin="10">
-		<TextBlock Margin="0 5" >Find Activites</TextBlock>
-		<Button Command="{Binding LoadActivitiesCommand}" Content="Load Activities"/>
-		<TextBox Watermark="Fit File Path" Text="{Binding FitFilePath}"/>
-		<StackPanel Orientation="Horizontal">
-			<Button Command="{Binding OkCommand}" Content="OK"/>
-			<Button Command="{Binding CancelCommand}" Content="Cancel"/>
-		</StackPanel>
-	</StackPanel>	
+
+	<Panel>
+		<ExperimentalAcrylicBorder IsHitTestVisible="False">
+			<ExperimentalAcrylicBorder.Material>
+				<ExperimentalAcrylicMaterial BackgroundSource="Digger"
+											 TintColor="Black"
+											 TintOpacity="1"
+											 MaterialOpacity="0.65" />
+			</ExperimentalAcrylicBorder.Material>
+		</ExperimentalAcrylicBorder>
+		<StackPanel Margin="10">
+			<TextBlock Margin="0 5" Foreground="LightGray">Find Activites</TextBlock>
+			<Button Command="{Binding LoadActivitiesCommand}" Content="Load Activities" Foreground="LightGray"/>
+			<TextBox Watermark="Fit File Path" Text="{Binding FitFilePath}"/>
+			<StackPanel Orientation="Horizontal">
+				<Button Command="{Binding OkCommand}" Content="OK" Foreground="LightGray"/>
+				<Button Command="{Binding CancelCommand}" Content="Cancel" Foreground="LightGray"/>
+			</StackPanel>
+		</StackPanel>	
+	</Panel>
 </Window>
