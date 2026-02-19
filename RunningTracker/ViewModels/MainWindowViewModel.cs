@@ -14,7 +14,7 @@ namespace RunningTracker.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         private string? _selectedActivityDate;
-        private readonly Logbook? _logbook;
+        private Logbook? _logbook;
 
         public MainWindowViewModel()
         {
@@ -27,11 +27,7 @@ namespace RunningTracker.ViewModels
 
             try
             {
-                _logbook = Persistence.LoadLogbook(SettingsPersistence.LogbookPath);
-
-                if (_logbook == null) { return; }
-
-                RefreshActivities();
+                LoadLogbook();           
             }
             catch (Exception)
             {
@@ -99,7 +95,17 @@ namespace RunningTracker.ViewModels
             RefreshActivities();
         }
 
-        void RefreshActivities()
+        public void LoadLogbook()
+        {
+            _logbook = Persistence.LoadLogbook(SettingsPersistence.LogbookPath);
+
+            if (_logbook != null)
+            {
+                RefreshActivities();
+            }
+        }
+
+        public void RefreshActivities()
         {
             ActivityDates.Clear();
 

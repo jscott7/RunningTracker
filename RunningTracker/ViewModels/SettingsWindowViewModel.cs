@@ -15,7 +15,8 @@ namespace RunningTracker.ViewModels
             // Behaviours for OK and Cancel Button click
             CancelCommand = ReactiveCommand.Create(() =>
             {
-                return _settingsData;
+                SettingsData? cancelData = null;
+                return cancelData;
             });
 
             OkCommand = ReactiveCommand.Create(() =>

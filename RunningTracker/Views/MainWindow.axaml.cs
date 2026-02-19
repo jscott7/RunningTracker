@@ -28,6 +28,11 @@ namespace RunningTracker.Views
             dialog.DataContext = interaction.Input;
             
             var result = await dialog.ShowDialog<SettingsData?>(this);
+            if (result?.LogbookPath?.Length > 0)
+            {
+                var mainWindowViewModel = (MainWindowViewModel)DataContext!;
+                mainWindowViewModel.LoadLogbook();
+            }
             interaction.SetOutput(result);
         }
 
