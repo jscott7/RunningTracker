@@ -24,6 +24,7 @@ namespace RunningTracker.ViewModels
             LoadMapCommand = ReactiveCommand.Create(async () => await LoadBitmap());
             SettingsCommand = ReactiveCommand.Create(async () => await OpenSettings());
             ImportActivitiesCommand = ReactiveCommand.Create(async () => await OpenImportActivities());
+            SaveActivitiesCommand = ReactiveCommand.Create(() => SaveActivities());
 
             try
             {
@@ -40,6 +41,8 @@ namespace RunningTracker.ViewModels
         public ICommand SettingsCommand { get; }
 
         public ICommand ImportActivitiesCommand { get; }
+
+        public ICommand SaveActivitiesCommand { get; }
 
         public Interaction<SettingsWindowViewModel, Models.SettingsData?> ShowDialog { get; }
 
@@ -124,6 +127,14 @@ namespace RunningTracker.ViewModels
             foreach (var date in activityDates.OrderByDescending(i => i))
             {
                 ActivityDates.Add(date);
+            }
+        }
+
+        void SaveActivities()
+        {
+            if (_logbook != null)
+            {
+                Persistence.SaveLogbook(_logbook, SettingsPersistence.LogbookPath);
             }
         }
     }

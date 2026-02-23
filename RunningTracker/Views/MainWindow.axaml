@@ -28,6 +28,9 @@
 		<Grid Margin="0,40,0,0" ColumnDefinitions="200,*" RowDefinitions="Auto,Auto">
 			<Panel Grid.Row="0" Grid.Column="1">
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+					<Button Command="{Binding SaveActivitiesCommand}" ToolTip.Tip="Save Activites">
+						<PathIcon Data="{StaticResource save_regular}" Foreground="LightGray" />
+					</Button>						
 					<Button Command="{Binding ImportActivitiesCommand}" ToolTip.Tip="Import Activites">
 						<PathIcon Data="{StaticResource arrow_import_regular}" Foreground="LightGray" />
 					</Button>			

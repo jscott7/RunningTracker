@@ -44,5 +44,36 @@ namespace Utilities
                 throw new InvalidOperationException("Failed to deserialize the XML document into a Logbook object.", ex);
             }
         }
+
+        public static void SaveLogbook(Logbook? logbook, string logbookPath)
+        {
+            if (logbook == null)
+            {
+                throw new ArgumentNullException(nameof(logbook), "Logbook cannot be null.");
+            }
+
+            if (string.IsNullOrEmpty(logbookPath))
+            {
+                throw new ArgumentException("Logbook path cannot be null or empty.", nameof(logbookPath));
+            }
+
+            var xmlSerializer = new XmlSerializer(typeof(Logbook));
+            var xmlDocument = new XmlDocument();
+            using (var memoryStream = new MemoryStream())
+            {
+                xmlSerializer.Serialize(memoryStream, logbook);
+                memoryStream.Position = 0;
+                xmlDocument.Load(memoryStream);
+            }
+
+            try
+            {
+                xmlDocument.Save(logbookPath);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException($"Failed to save the Logbook to {logbookPath}.", ex);
+            }
+        }
     }
 }

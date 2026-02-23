@@ -8,6 +8,9 @@ This is a good opportunity to experiment with using the Avalonia UI framework as
 
 # Technical 
 
+## Icons
+See https://avaloniaui.github.io/icons.html for Fluent UI icon definitions.
+
 ## Adding a new dialog window
 
 Example for SettingsWindow
