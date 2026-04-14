@@ -28,13 +28,16 @@ namespace SportTracksXmlReader
         public string SpeedUnits;
 
         [XmlAttribute(AttributeName = "speedZone")]
-        public Guid SpeedZone;
+        public Guid SpeedZone { get; set; }
+        public bool ShouldSerializeSpeedZone() => SpeedZone != Guid.Empty;
 
         [XmlAttribute(AttributeName = "heartRateZone")]
-        public Guid HeartRateZone;
+        public Guid HeartRateZone { get; set; }
+        public bool ShouldSerializHeartRateZone() => HeartRateZone != Guid.Empty;
 
         [XmlAttribute(AttributeName = "calorieCalculationMethod")]
-        public Guid CalorieCalculationMethod;
+        public Guid CalorieCalculationMethod { get; set; }
+        public bool ShouldSerializeCalorieCalculationMethod() => CalorieCalculationMethod != Guid.Empty;
 
         [XmlArrayItem("ActivityCategory")]
         public ActivityCategory[] Categories;
