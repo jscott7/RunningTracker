@@ -33,7 +33,7 @@ namespace SportTracksXmlReader
 
         [XmlAttribute(AttributeName = "heartRateZone")]
         public Guid HeartRateZone { get; set; }
-        public bool ShouldSerializHeartRateZone() => HeartRateZone != Guid.Empty;
+        public bool ShouldSerializeHeartRateZone() => HeartRateZone != Guid.Empty;
 
         [XmlAttribute(AttributeName = "calorieCalculationMethod")]
         public Guid CalorieCalculationMethod { get; set; }
