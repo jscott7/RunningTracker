@@ -2,8 +2,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="using:RunningTracker.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="RunningTracker.Views.StaticPanelView">
+             x:Class="RunningTracker.Views.StaticPanelView"
+			 x:DataType="vm:StaticPanelViewModel">
+
 	<Panel>
 		<ScrollViewer Padding="0" Margin="0" Width="600" Height="600" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
 			<Image Width="800" Stretch="Uniform" Source="{Binding StaticMapPanel}" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
