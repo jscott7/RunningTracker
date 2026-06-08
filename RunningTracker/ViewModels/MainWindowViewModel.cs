@@ -14,6 +14,7 @@ namespace RunningTracker.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         private string? _selectedActivityDate;
+        private string? _selectedActivityDetails;
         private Logbook? _logbook;
 
         public MainWindowViewModel()
@@ -21,7 +22,7 @@ namespace RunningTracker.ViewModels
             ShowDialog = new Interaction<SettingsWindowViewModel, Models.SettingsData?>();
             ShowImportActivitiesDialog = new Interaction<ImportActivitiesWindowViewModel, Models.ImportedActivitesData?>();
 
-            LoadMapCommand = ReactiveCommand.Create(async () => await LoadBitmap());
+            LoadMapCommand = ReactiveCommand.Create(async () => await LoadActivity());
             SettingsCommand = ReactiveCommand.Create(async () => await OpenSettings());
             ImportActivitiesCommand = ReactiveCommand.Create(async () => await OpenImportActivities());
             SaveActivitiesCommand = ReactiveCommand.Create(() => SaveActivities());
@@ -60,13 +61,15 @@ namespace RunningTracker.ViewModels
             await ShowImportActivitiesDialog.Handle(importActivitesViewModel);
         }
 
-        public async Task LoadBitmap()
+        public async Task LoadActivity()
         {
             MapPanels.Clear();
             if (_selectedActivityDate is string selectedActivityDate)
             {
                 var selectedActivity = _logbook.Activities.First(a => a.StartTime == DateTime.Parse(selectedActivityDate));
-
+                var distance = (float)Math.Floor(selectedActivity.TotalDistance);
+                var timespan = TimeSpan.FromSeconds(selectedActivity.TotalTime);
+                SelectedActivityDetails = $"Time : {selectedActivity.StartTime} Distance : {distance}m TotalTime : {timespan.Hours}h {timespan.Minutes}m {timespan.Seconds}s";
                 var gpsRoute = selectedActivity.GPSRoute;
                 gpsRoute.DecodeBinaryData();
                 MapPanels.Add(new StaticPanelViewModel(gpsRoute));
@@ -85,6 +88,12 @@ namespace RunningTracker.ViewModels
         {
             get => _selectedActivityDate;
             set => this.RaiseAndSetIfChanged(ref _selectedActivityDate, value);
+        }
+
+        public string? SelectedActivityDetails
+        {
+            get => _selectedActivityDetails;
+            set => this.RaiseAndSetIfChanged(ref _selectedActivityDetails, value);
         }
 
         public ObservableCollection<StaticPanelViewModel> MapPanels { get; } = new();

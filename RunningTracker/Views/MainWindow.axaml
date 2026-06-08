@@ -44,6 +44,7 @@
 			</ListBox>
 			<DockPanel Grid.Row="1" Grid.Column="1">
 				<Button Command="{Binding LoadMapCommand}" Content="Load Map" Foreground="LightGray" DockPanel.Dock="Top"/>
+				<TextBlock Margin="0 5" Foreground="LightGray" DockPanel.Dock="Top" Text="{Binding SelectedActivityDetails}"/>
 				<ListBox ItemsSource="{Binding MapPanels}" Background="Transparent" Padding="0" Margin="0">
 					<ListBox.ItemsPanel>
 						<ItemsPanelTemplate>
