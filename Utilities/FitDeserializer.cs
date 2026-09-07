@@ -252,6 +252,11 @@ namespace Utilities
             var longDegrees = GPSLib.CoordinateConversion.SemicircleToDegrees(longit);
 
             var alt = recordMessage.GetAltitude();
+            if (alt == null)
+            {
+                // For Hiking and other activities, the altitude may be stored in the enhanced altitude field instead of the standard altitude field.
+                alt = recordMessage.GetEnhancedAltitude();
+            }
             var timestamp = recordMessage.GetTimestamp();
 
             if (_activity.GPSRoute.StartTime.Count == 0)
