@@ -1,3 +1,6 @@
+using MsBox.Avalonia;
+using MsBox.Avalonia.Dto;
+using MsBox.Avalonia.Enums;
 using ReactiveUI;
 using SportTracksXmlReader;
 using System;
@@ -33,7 +36,7 @@ namespace RunningTracker.ViewModels
             }
             catch (Exception)
             {
-                // TODO : Handle this
+                ShowErrorMessage();
             }
         }
 
@@ -145,6 +148,21 @@ namespace RunningTracker.ViewModels
             {
                 Persistence.SaveLogbook(_logbook, SettingsPersistence.LogbookPath);
             }
+        }
+
+        private async void ShowErrorMessage()
+        {
+            var box = MessageBoxManager.GetMessageBoxStandard(new MessageBoxStandardParams
+            {
+                ButtonDefinitions = ButtonEnum.Ok,
+                ContentTitle = "Error",
+                ContentMessage = "Failed to load the logbook. Please check the logbook path in settings.",
+                Icon = Icon.Error,
+                Topmost = true,
+                ShowInCenter = true
+            });
+
+            var result = await box.ShowAsync();
         }
     }
 }
